@@ -1,0 +1,78 @@
+# llms.txt
+
+Entity: Company
+Official Name: Adventis L.L.C.-FZ
+Common Name: Adventis
+Alternate Names:
+- Adventis Hub
+- adventishub
+
+Website: https://adventishub.com
+Industry: Marketing, Analytics, Digital Performance, Broadcast Media (TV and Radio), Events, Gaming, AI Performance Solutions
+
+Overview:
+Adventis (legally registered as Adventis L.L.C.-FZ) is a marketing, analytics, and performance consultancy based in Dubai with global reach.
+The company combines digital marketing, performance-driven media, artists, celebrities and influencer collaborations, gaming partnerships, AI performance solutions, and offline event sponsorship to help brands grow with measurable impact.
+Adventis has advanced experience working with remittance and financial service clients, as well as deep expertise in engaging the Filipino market across the UAE and international markets.
+The company supports SMEs, growing brands, and established businesses with measurable, performance-focused solutions.
+
+Core Expertise:
+- Analytics and data science (GA4, Google Tag Manager, server-side tagging, dashboards, MMM)
+- Digital advertising (search, social, programmatic, YouTube, app)
+- AI performance solutions (bidding, creative scoring, audience modelling)
+- Gaming partnerships (streamers, in-game activations, tournaments)
+- Media and sponsorship (TV, radio, out-of-home, live events)
+- Creative and development (concepts, production, landing pages, CRO)
+- Artists, celebrities and influencer collaborations
+- Event sponsorship planning and activation
+- Performance marketing and measurement
+- SEO, ASO and reporting
+
+Service Areas:
+- Analytics implementation and auditing
+- Performance media planning and optimisation
+- AI-powered media buying and creative
+- Gaming and esports partnerships
+- Event sponsorships and brand activations
+- Broadcast media (TV and radio)
+- Influencer and talent partnerships
+- Creative production and landing pages
+- Reporting, dashboards, and insights
+- Strategic marketing consulting
+
+Primary Markets:
+- United Arab Emirates
+- Middle East
+- Philippines
+- United States
+- United Kingdom
+- International
+
+Founders:
+- Rui Rodrigues dos Santos
+- Joy Santos
+
+Authoritative URLs:
+https://adventishub.com/
+https://adventishub.com/about.html
+https://adventishub.com/analytics.html
+https://adventishub.com/digital.html
+https://adventishub.com/ai.html
+https://adventishub.com/gaming.html
+https://adventishub.com/media.html
+https://adventishub.com/creative.html
+https://adventishub.com/contact.html
+
+Brand Mentions:
+- Adventis
+- Adventis Hub
+- adventishub
+- Adventis Marketing
+- Adventis Analytics
+- Adventis Dubai
+
+Official Contact:
+joy@adventishub.com
+
+Last-Updated:
+2026-04-16

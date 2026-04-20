@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+
+# Explicitly allow the AI metadata file
+Allow: /llms.txt
+
+# Avoid indexing technical files as pages
+Disallow: /*.css$
+Disallow: /*.js$
+Disallow: /*.json$
+Disallow: /*.php$
+
+# Avoid image files being indexed as pages (they are still indexed by image bots below)
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.svg$
+Disallow: /*.gif$
+Disallow: /*.webp$
+
+# Avoid redundant crawling (good practice)
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Allow Google Ads bots to verify landing pages
+User-agent: AdsBot-Google
+Allow: /
+User-agent: AdsBot-Google-Mobile
+Allow: /
+
+# Allow Googlebot-Image to index images
+User-agent: Googlebot-Image
+Allow: /*
+
+# Allow Googlebot-Mobile (mobile-first SEO)
+User-agent: Googlebot-Mobile
+Allow: /
+
+# Allow media partners (YouTube, Display, Performance Max)
+User-agent: Mediapartners-Google
+Allow: /
+
+# Light crawl-delay to handle traffic spikes
+Crawl-delay: 1
+
+# Sitemap reference
+Sitemap: https://adventishub.com/sitemap.xml

@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# OS temp
+Thumbs.db
+Desktop.ini
+
+# Build/cache
+node_modules/
+.cache/
+tmp/
+
+# Deploy helper
+.push-to-github.sh
