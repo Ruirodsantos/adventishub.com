@@ -134,29 +134,25 @@
     updateProgress();
   }
 
-  // ---------- Subtle parallax on hero orbs ----------
-  const orbs = document.querySelectorAll('.hero-orbs .orb');
-  if (orbs.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const hero = document.querySelector('.hero-home');
-    if (hero) {
-      let raf = null;
-      const onMove = (e) => {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          const r = hero.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width) - 0.5;
-          const y = ((e.clientY - r.top) / r.height) - 0.5;
-          orbs.forEach((orb, i) => {
-            const depth = (i + 1) * 10;
-            orb.style.translate = `${x * depth}px ${y * depth}px`;
-          });
-          raf = null;
-        });
-      };
-      hero.addEventListener('mousemove', onMove);
-      hero.addEventListener('mouseleave', () => {
-        orbs.forEach(orb => { orb.style.translate = ''; });
-      });
-    }
+  // ---------- Hero scroll parallax (Rockstar-style) ----------
+  // Hero copy drifts up at ~35% of scroll speed and fades out gently,
+  // creating a smooth reveal as the next section comes into view.
+  const heroParallax = document.querySelector('.hero-home .hero-parallax');
+  if (heroParallax && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let pTick = false;
+    const updateHero = () => {
+      const y = window.scrollY || document.documentElement.scrollTop;
+      const vh = window.innerHeight || 800;
+      const p = Math.max(0, Math.min(1, y / (vh * 0.85)));
+      const translate = Math.round(y * 0.35);
+      const opacity = 1 - p;
+      heroParallax.style.setProperty('--py', `-${translate}px`);
+      heroParallax.style.setProperty('--po', opacity.toFixed(3));
+      pTick = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!pTick) { requestAnimationFrame(updateHero); pTick = true; }
+    }, { passive: true });
+    updateHero();
   }
 })();

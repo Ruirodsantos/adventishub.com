@@ -681,54 +681,16 @@ footer.site .bottom .tag{color:var(--c-green);font-weight:600;letter-spacing:.08
 /* About preview — bring it visually closer to services (tight top padding) */
 .section.tight.about-preview{padding-top:clamp(20px, 3vw, 40px)}
 
-/* Hero decorative orbs */
-.hero-orbs{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.hero-orbs .orb{
-  position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;
-  will-change:transform;
-}
-.hero-orbs .orb-a{
-  width:460px;height:460px;left:-120px;top:10%;
-  background:radial-gradient(circle, rgba(0,196,140,0.55), transparent 70%);
-  animation:orbFloatA 16s ease-in-out infinite alternate;
-}
-.hero-orbs .orb-b{
-  width:520px;height:520px;right:-140px;top:30%;
-  background:radial-gradient(circle, rgba(120,60,220,0.55), transparent 70%);
-  animation:orbFloatB 18s ease-in-out infinite alternate;
-}
-.hero-orbs .orb-c{
-  width:320px;height:320px;left:40%;bottom:-120px;
-  background:radial-gradient(circle, rgba(0,196,140,0.4), transparent 70%);
-  animation:orbFloatC 14s ease-in-out infinite alternate;
-}
-@keyframes orbFloatA{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(40px,30px) scale(1.1)}
-}
-@keyframes orbFloatB{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(-30px,40px) scale(0.95)}
-}
-@keyframes orbFloatC{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(20px,-30px) scale(1.15)}
-}
-
-/* Keep hero text above orbs */
-.hero-home .content,.hero-home .scroll-hint{position:relative;z-index:2}
-.hero-home .grid-lines{z-index:1}
-
-/* Soft fade at the bottom of hero into the white section */
-.hero-fade{
-  position:absolute;left:0;right:0;bottom:0;height:120px;z-index:2;
-  background:linear-gradient(180deg, transparent 0%, #fff 100%);
-  pointer-events:none;
+/* Hero parallax — content drifts up slightly and fades as you scroll (Rockstar-style reveal) */
+.hero-parallax{
+  will-change:transform, opacity;
+  transform:translate3d(0, var(--py, 0px), 0);
+  opacity:var(--po, 1);
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
   .hero-home .scroll-hint::after{animation:none}
-  .hero-orbs .orb{animation:none}
+  .hero-parallax{transform:none;opacity:1}
 }
