@@ -120,6 +120,20 @@ header.site .cta:hover{background:var(--c-green);color:var(--c-purple)!important
 /* -------- Dropdown -------- */
 .dropdown{position:relative}
 .dropbtn::after{content:"";margin-left:6px;display:inline-block;width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);vertical-align:2px}
+/* Invisible hover bridge so the menu doesn't close when the cursor
+   crosses the gap between the Services button and the dropdown panel. */
+.dropdown::after{
+  content:"";
+  position:absolute;
+  top:100%;
+  left:-24px;
+  right:-24px;
+  height:18px;
+  background:transparent;
+  pointer-events:none;
+}
+.dropdown:hover::after,
+.dropdown:focus-within::after{pointer-events:auto}
 .dropdown-content{
   position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(6px);
   background:#fff;
@@ -133,7 +147,8 @@ header.site .cta:hover{background:var(--c-green);color:var(--c-purple)!important
   z-index:1200;
 }
 .dropdown:hover .dropdown-content,
-.dropdown:focus-within .dropdown-content{
+.dropdown:focus-within .dropdown-content,
+.dropdown-content:hover{
   opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0);
 }
 .dropdown-content a{
