@@ -248,8 +248,10 @@ h3{font-size:var(--fs-h3);letter-spacing:-0.005em}
 p.lead{font-size:var(--fs-lead);color:var(--c-text-soft);max-width:68ch}
 .section-dark p.lead, .section-purple p.lead{color:rgba(255,255,255,.78)}
 
-.section-head{display:grid;gap:14px;margin-bottom:48px;max-width:760px}
+.section-head{display:grid;gap:14px;margin-bottom:36px;max-width:880px}
 .section-head.center{margin-inline:auto;text-align:center;justify-items:center}
+.section-head h2{text-wrap:balance}
+.section-head .lead,.section-head > p{text-wrap:pretty}
 
 /* -------- Hero (home) -------- */
 .hero-home{
@@ -812,4 +814,81 @@ footer.site .bottom .tag{color:var(--c-green);font-weight:600;letter-spacing:.08
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
   .hero-home .scroll-hint::after{animation:none}
   .hero-parallax{transform:none;opacity:1}
+}
+
+/* ==========================================================================
+   Service page side decorations (one per service) — subtle SVG patterns
+   positioned off the left/right edges, fixed so they drift with scroll.
+   ========================================================================== */
+body[class*="svc-"] main#main{position:relative}
+body[class*="svc-"] main#main::before,
+body[class*="svc-"] main#main::after{
+  content:"";
+  position:fixed;
+  top:50%;
+  width:420px;height:420px;
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  transform:translateY(-50%);
+}
+body[class*="svc-"] main#main::before{left:-180px}
+body[class*="svc-"] main#main::after{right:-180px}
+body[class*="svc-"] main#main > *{position:relative;z-index:1}
+
+/* Analytics — bar chart + grid */
+body.svc-analytics main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-width='1' stroke-opacity='0.18'><path d='M40 360 L360 360'/><path d='M40 40 L40 360'/><g stroke-opacity='0.10'><path d='M40 280 L360 280'/><path d='M40 200 L360 200'/><path d='M40 120 L360 120'/></g></g><g fill='%232A0753' fill-opacity='0.10'><rect x='70' y='220' width='36' height='140' rx='4'/><rect x='130' y='160' width='36' height='200' rx='4'/><rect x='190' y='100' width='36' height='260' rx='4'/><rect x='250' y='180' width='36' height='180' rx='4'/><rect x='310' y='60' width='36' height='300' rx='4'/></g><path d='M70 240 L130 180 L190 120 L250 200 L310 80' fill='none' stroke='%2300C48C' stroke-width='2.2' stroke-opacity='0.6'/><g fill='%2300C48C' fill-opacity='0.55'><circle cx='70' cy='240' r='4'/><circle cx='130' cy='180' r='4'/><circle cx='190' cy='120' r='4'/><circle cx='250' cy='200' r='4'/><circle cx='310' cy='80' r='4'/></g></svg>");
+}
+body.svc-analytics main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.12'><circle cx='200' cy='200' r='180'/><circle cx='200' cy='200' r='130'/><circle cx='200' cy='200' r='80'/><path d='M20 200 L380 200 M200 20 L200 380'/></g><g fill='%2300C48C' fill-opacity='0.45'><circle cx='260' cy='140' r='5'/></g></svg>");
+}
+
+/* Digital — search/targeting crosshair + signals */
+body.svc-digital main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14'><circle cx='200' cy='200' r='170'/><circle cx='200' cy='200' r='120'/><circle cx='200' cy='200' r='70'/><path d='M30 200 L370 200 M200 30 L200 370'/></g><g fill='none' stroke='%2300C48C' stroke-width='2' stroke-opacity='0.55'><path d='M200 200 L330 120'/></g><g fill='%2300C48C' fill-opacity='0.55'><circle cx='330' cy='120' r='6'/></g></svg>");
+}
+body.svc-digital main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14'><path d='M200 340 C120 340 80 280 80 200 C80 120 120 60 200 60'/><path d='M200 320 C140 320 110 270 110 200 C110 130 140 80 200 80'/><path d='M200 300 C160 300 140 260 140 200 C140 140 160 100 200 100'/></g><g fill='%2300C48C' fill-opacity='0.5'><circle cx='200' cy='200' r='8'/></g></svg>");
+}
+
+/* AI — neural network */
+body.svc-ai main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g stroke='%232A0753' stroke-opacity='0.15' fill='none'><path d='M80 90 L200 200 M80 200 L200 200 M80 310 L200 200 M200 200 L320 90 M200 200 L320 200 M200 200 L320 310'/></g><g fill='%232A0753' fill-opacity='0.18'><circle cx='80' cy='90' r='8'/><circle cx='80' cy='200' r='8'/><circle cx='80' cy='310' r='8'/><circle cx='320' cy='90' r='8'/><circle cx='320' cy='200' r='8'/><circle cx='320' cy='310' r='8'/></g><circle cx='200' cy='200' r='12' fill='%2300C48C' fill-opacity='0.55'/></svg>");
+}
+body.svc-ai main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14'><rect x='120' y='120' width='160' height='160' rx='20'/><rect x='150' y='150' width='100' height='100' rx='14'/></g><g fill='%2300C48C' fill-opacity='0.45'><circle cx='200' cy='200' r='6'/></g><g stroke='%2300C48C' stroke-opacity='0.4' fill='none'><path d='M60 200 L120 200 M280 200 L340 200 M200 60 L200 120 M200 280 L200 340'/></g></svg>");
+}
+
+/* Media — broadcast waves */
+body.svc-media main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14' stroke-linecap='round'><path d='M60 300 C100 220 180 220 220 300'/><path d='M40 320 C90 200 190 200 240 320'/><path d='M20 340 C80 180 200 180 260 340'/></g><g fill='%232A0753' fill-opacity='0.2'><circle cx='140' cy='300' r='7'/></g><g fill='%2300C48C' fill-opacity='0.5'><circle cx='300' cy='120' r='6'/><circle cx='330' cy='90' r='4'/></g></svg>");
+}
+body.svc-media main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14'><rect x='80' y='120' width='240' height='150' rx='12'/><path d='M160 270 L160 300 M240 270 L240 300 M130 310 L270 310'/></g><g stroke='%2300C48C' stroke-opacity='0.4' fill='none'><path d='M60 80 L100 110 M340 80 L300 110'/></g></svg>");
+}
+
+/* Celebrities — star + sparkles */
+body.svc-celebrities main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='%232A0753' fill-opacity='0.14'><path d='M200 70 L224 160 L316 160 L241 214 L270 300 L200 248 L130 300 L159 214 L84 160 L176 160 Z'/></g><g fill='%2300C48C' fill-opacity='0.5'><circle cx='100' cy='120' r='4'/><circle cx='320' cy='100' r='5'/><circle cx='80' cy='300' r='3'/><circle cx='340' cy='280' r='4'/></g></svg>");
+}
+body.svc-celebrities main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.14'><circle cx='200' cy='200' r='120'/><circle cx='200' cy='200' r='170'/></g><g fill='%2300C48C' fill-opacity='0.5'><path d='M200 150 L208 185 L240 185 L215 205 L224 240 L200 220 L176 240 L185 205 L160 185 L192 185 Z'/></g></svg>");
+}
+
+/* Creative — pen/brush + pixel grid */
+body.svc-creative main#main::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.12' stroke-width='1'><path d='M0 100 L400 100 M0 200 L400 200 M0 300 L400 300 M100 0 L100 400 M200 0 L200 400 M300 0 L300 400'/></g><g fill='%232A0753' fill-opacity='0.16'><rect x='100' y='100' width='100' height='100'/></g><g fill='%2300C48C' fill-opacity='0.45'><rect x='200' y='200' width='100' height='100'/></g></svg>");
+}
+body.svc-creative main#main::after{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'><g fill='none' stroke='%232A0753' stroke-opacity='0.16' stroke-linecap='round' stroke-width='2'><path d='M80 320 L240 160 L260 180 L100 340 Z'/><path d='M240 160 L280 120 L300 140 L260 180'/></g><g fill='%232A0753' fill-opacity='0.12'><circle cx='120' cy='100' r='14'/></g><g fill='%2300C48C' fill-opacity='0.5'><circle cx='320' cy='300' r='8'/></g></svg>");
+}
+
+/* Hide side decorations on tablets/phones to avoid clutter */
+@media (max-width: 1200px){
+  body[class*="svc-"] main#main::before,
+  body[class*="svc-"] main#main::after{display:none}
 }
