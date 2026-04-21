@@ -117,6 +117,29 @@
     <!-- Hero -->
     <section class="hero-home">
       <div class="grid-lines" aria-hidden="true"></div>
+
+      <!-- Decorative growth sparkline — represents the "grows your business" idea -->
+      <svg class="hero-chart" viewBox="0 0 600 180" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="gCurve" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#00C48C" stop-opacity="0"/>
+            <stop offset="40%" stop-color="#00C48C" stop-opacity=".85"/>
+            <stop offset="100%" stop-color="#7C4DFF" stop-opacity=".85"/>
+          </linearGradient>
+          <linearGradient id="gFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00C48C" stop-opacity=".22"/>
+            <stop offset="100%" stop-color="#00C48C" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,140 C80,135 140,120 200,100 C260,80 300,95 340,75 C390,55 430,40 480,25 C530,15 570,10 600,8 L600,180 L0,180 Z" fill="url(#gFill)"/>
+        <path d="M0,140 C80,135 140,120 200,100 C260,80 300,95 340,75 C390,55 430,40 480,25 C530,15 570,10 600,8" fill="none" stroke="url(#gCurve)" stroke-width="2" stroke-linecap="round"/>
+        <g class="hero-chart-dots">
+          <circle cx="200" cy="100" r="3"/>
+          <circle cx="340" cy="75" r="3"/>
+          <circle cx="480" cy="25" r="4"/>
+        </g>
+      </svg>
+
       <div class="content hero-parallax">
         <h1>Marketing that <span class="grad">grows</span><br />your business.</h1>
         <p class="tagline">We combine performance media, analytics, AI and creative so every campaign moves a business metric you care about.</p>
@@ -126,6 +149,11 @@
         </div>
       </div>
       <span class="scroll-hint" aria-hidden="true">Scroll</span>
+
+      <!-- Wave transition into the next section -->
+      <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0,64 C240,20 480,90 720,60 C960,30 1200,80 1440,40 L1440,90 L0,90 Z"/>
+      </svg>
     </section>
 
     <!-- Services -->
