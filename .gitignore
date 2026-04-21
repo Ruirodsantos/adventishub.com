@@ -29,3 +29,6 @@ tmp/
 .deploy-trigger
 .deploy-log
 com.adventishub.deploy.plist
+
+# sed backups
+*.bak

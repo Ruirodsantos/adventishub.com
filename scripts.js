@@ -155,4 +155,22 @@
     }, { passive: true });
     updateHero();
   }
+
+  // ---------- About-preview decoration parallax ----------
+  const aboutSec = document.querySelector('.section.tight.about-preview');
+  if (aboutSec && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let aTick = false;
+    const updateAbout = () => {
+      const rect = aboutSec.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      const p = 1 - Math.max(0, Math.min(1, (rect.top + rect.height) / (vh + rect.height)));
+      const ty = (p - 0.5) * 60;
+      aboutSec.style.setProperty('--about-ty', ty.toFixed(1) + 'px');
+      aTick = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!aTick) { requestAnimationFrame(updateAbout); aTick = true; }
+    }, { passive: true });
+    updateAbout();
+  }
 })();
