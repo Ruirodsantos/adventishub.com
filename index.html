@@ -111,10 +111,17 @@
     <a href="contact.html">Contact Us</a>
   </aside>
 
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
   <main id="main">
     <!-- Hero -->
     <section class="hero-home">
       <div class="grid-lines" aria-hidden="true"></div>
+      <div class="hero-orbs" aria-hidden="true">
+        <span class="orb orb-a"></span>
+        <span class="orb orb-b"></span>
+        <span class="orb orb-c"></span>
+      </div>
       <div class="content">
         <h1>Marketing that <span class="grad">grows</span><br />your business.</h1>
         <p class="tagline">We combine performance media, analytics, AI and creative so every campaign moves a business metric you care about.</p>
@@ -124,19 +131,20 @@
         </div>
       </div>
       <span class="scroll-hint" aria-hidden="true">Scroll</span>
+      <div class="hero-fade" aria-hidden="true"></div>
     </section>
 
     <!-- Services -->
-    <section id="services" class="section">
+    <section id="services" class="section section-soft">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">What we do</span>
-          <h2>Six disciplines, one growth engine.</h2>
-          <p class="lead">We pair data and craft — planning, buying, building and measuring — so your marketing keeps working after the campaign ends.</p>
+          <h2>Seven disciplines, one growth engine.</h2>
+          <p class="lead">We pair data with craft across planning, buying, building and measuring, so your marketing keeps working after the campaign ends.</p>
         </div>
 
-        <div class="services">
-          <a class="service-card reveal" href="analytics.html">
+        <div class="services services-7">
+          <a class="service-card reveal" href="analytics.html" style="--i:0">
             <span class="num">01</span>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
@@ -146,17 +154,17 @@
             <span class="more">Learn more</span>
           </a>
 
-          <a class="service-card reveal" href="digital.html">
+          <a class="service-card reveal" href="digital.html" style="--i:1">
             <span class="num">02</span>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 010 18"/><path d="M12 3a14 14 0 000 18"/></svg>
             </span>
             <h3>Digital Advertising</h3>
-            <p>Search, social, video and programmatic tuned for compounding efficiency — not one-off spikes.</p>
+            <p>Search, social, video and programmatic tuned for compounding efficiency, not one-off spikes.</p>
             <span class="more">Learn more</span>
           </a>
 
-          <a class="service-card reveal" href="ai.html">
+          <a class="service-card reveal" href="ai.html" style="--i:2">
             <span class="num">03</span>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="3"/><path d="M9 9h.01M15 9h.01M9 14c1 1 5 1 6 0"/></svg>
@@ -166,7 +174,7 @@
             <span class="more">Learn more</span>
           </a>
 
-          <a class="service-card reveal" href="gaming.html">
+          <a class="service-card reveal" href="gaming.html" style="--i:3">
             <span class="num">04</span>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 9h3M8.5 7.5v3M15 10h.01M17 8h.01"/><rect x="3" y="7" width="18" height="10" rx="4"/></svg>
@@ -176,20 +184,30 @@
             <span class="more">Learn more</span>
           </a>
 
-          <a class="service-card reveal" href="media.html">
+          <a class="service-card reveal" href="media.html" style="--i:4">
             <span class="num">05</span>
             <span class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             </span>
             <h3>Media &amp; Sponsorship</h3>
-            <p>TV, radio, out-of-home, influencers and events — planned to extend digital, not compete with it.</p>
+            <p>TV, radio, out-of-home, influencers and events, all planned to extend digital rather than compete with it.</p>
             <span class="more">Learn more</span>
           </a>
 
-          <a class="service-card reveal" href="creative.html">
+          <a class="service-card reveal" href="celebrities.html" style="--i:5">
             <span class="num">06</span>
             <span class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9 1 5.5L12 15.8 7 18.2l1-5.5-4-3.9 5.5-.8z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.7L12 16.4 6.8 19l1-5.7-4.3-4.1 5.9-.9z"/><path d="M12 3v13.4"/></svg>
+            </span>
+            <h3>Celebrities &amp; Influencers</h3>
+            <p>Celebrities, creators and ambassadors matched to your audience, contracted and measured end-to-end.</p>
+            <span class="more">Learn more</span>
+          </a>
+
+          <a class="service-card reveal" href="creative.html" style="--i:6">
+            <span class="num">07</span>
+            <span class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20l4-1 10-10-3-3L5 16z"/><path d="M14 6l3 3"/></svg>
             </span>
             <h3>Creative &amp; Development</h3>
             <p>Design and engineering that look premium, ship fast and are informed by performance data.</p>
@@ -200,12 +218,12 @@
     </section>
 
     <!-- About preview -->
-    <section class="section">
+    <section class="section tight about-preview">
       <div class="container" style="max-width:920px">
         <div class="prose reveal">
           <span class="eyebrow">Who we are</span>
           <h2 style="margin-top:10px">Data-informed. Creatively disciplined.</h2>
-          <p class="lead">Adventis combines digital marketing, performance analytics, talent &amp; influencer collaborations and event sponsorship to grow brands with measurable impact — across the UAE, the wider Middle East and international markets.</p>
+          <p class="lead">Adventis combines digital marketing, performance analytics, talent and influencer collaborations and event sponsorship to grow brands with measurable impact across the UAE, the wider Middle East and international markets.</p>
           <p>We bring advanced experience with remittance and financial services clients, and strong knowledge of multicultural audiences including the Filipino market.</p>
           <p style="margin-top:18px"><a href="about.html" class="btn dark">More about us <span class="arrow">→</span></a></p>
         </div>
@@ -218,7 +236,7 @@
         <div class="cta-band reveal">
           <div>
             <h2>Have a brief, a goal, or a question?</h2>
-            <p>Tell us a little about your business. We'll reply with a point of view — not a pitch deck.</p>
+            <p>Tell us a little about your business. We'll reply with a point of view, not a pitch deck.</p>
           </div>
           <a href="contact.html" class="btn">Get in touch <span class="arrow">→</span></a>
         </div>
@@ -231,7 +249,7 @@
       <div class="row">
         <div class="brand">
           <img src="images/Website_Adventis_Logo.png" alt="Adventis" />
-          <p>Performance marketing, analytics &amp; creative for brands that want to grow — measurably.</p>
+          <p>Performance marketing, analytics and creative for brands that want measurable growth.</p>
         </div>
         <div>
           <h5>Services</h5>

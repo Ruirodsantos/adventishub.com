@@ -112,4 +112,51 @@
   // ---------- Footer year ----------
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
+
+  // ---------- Scroll progress bar ----------
+  const progressBar = document.querySelector('.scroll-progress span');
+  if (progressBar) {
+    let ticking = false;
+    const updateProgress = () => {
+      const h = document.documentElement;
+      const scrolled = h.scrollTop || document.body.scrollTop;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const pct = Math.max(0, Math.min(100, (scrolled / max) * 100));
+      progressBar.style.width = pct + '%';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateProgress();
+  }
+
+  // ---------- Subtle parallax on hero orbs ----------
+  const orbs = document.querySelectorAll('.hero-orbs .orb');
+  if (orbs.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const hero = document.querySelector('.hero-home');
+    if (hero) {
+      let raf = null;
+      const onMove = (e) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const r = hero.getBoundingClientRect();
+          const x = ((e.clientX - r.left) / r.width) - 0.5;
+          const y = ((e.clientY - r.top) / r.height) - 0.5;
+          orbs.forEach((orb, i) => {
+            const depth = (i + 1) * 10;
+            orb.style.translate = `${x * depth}px ${y * depth}px`;
+          });
+          raf = null;
+        });
+      };
+      hero.addEventListener('mousemove', onMove);
+      hero.addEventListener('mouseleave', () => {
+        orbs.forEach(orb => { orb.style.translate = ''; });
+      });
+    }
+  }
 })();

@@ -23,5 +23,9 @@ node_modules/
 .cache/
 tmp/
 
-# Deploy helper
+# Deploy helper + launchd watcher
 .push-to-github.sh
+.deploy-watcher.sh
+.deploy-trigger
+.deploy-log
+com.adventishub.deploy.plist
