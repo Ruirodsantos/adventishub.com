@@ -568,8 +568,8 @@ p.lead{font-size:var(--fs-lead);color:var(--c-text-soft);max-width:68ch}
   padding:clamp(40px, 6vw, 72px) clamp(24px, 4vw, 56px);
   display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
 }
-.cta-band h2{font-size:clamp(26px, 3vw, 36px);margin-bottom:8px;max-width:30ch;text-wrap:balance}
-.cta-band p{color:rgba(255,255,255,.78);max-width:62ch;text-wrap:pretty}
+.cta-band h2{font-size:clamp(26px, 3vw, 36px);margin-bottom:8px;text-wrap:balance}
+.cta-band p{color:rgba(255,255,255,.78);text-wrap:pretty}
 @media (max-width: 720px){.cta-band{grid-template-columns:1fr;text-align:left}}
 
 /* -------- Contact card -------- */
@@ -678,11 +678,18 @@ footer.site .bottom .tag{color:var(--c-green);font-weight:600;letter-spacing:.08
 .service-card:hover .icon{background:rgba(0,196,140,0.22);transform:scale(1.06) rotate(-2deg)}
 .service-card .icon{transition:background .3s var(--ease), transform .35s var(--ease)}
 
-/* About preview — bring it visually closer to services and compact the card */
-.section.tight.about-preview{padding-top:clamp(20px, 3vw, 40px);padding-bottom:clamp(24px, 3vw, 48px)}
-.section.tight.about-preview .prose{padding:clamp(24px, 3vw, 40px)}
+/* About preview — compact section + soft gradient-pattern background on card */
+.section.tight.about-preview{padding:clamp(8px, 1.5vw, 20px) 0 clamp(12px, 2vw, 28px)}
+.section.tight.about-preview .prose{
+  padding:clamp(22px, 3vw, 36px);
+  background:
+    radial-gradient(420px circle at 95% 0%, rgba(0,196,140,0.09), transparent 62%),
+    radial-gradient(380px circle at 0% 100%, rgba(42,7,83,0.07), transparent 60%),
+    #fff;
+}
 .section.tight.about-preview .prose h2{margin:6px 0 10px}
-.section.tight.about-preview .prose p{margin-bottom:12px}
+.section.tight.about-preview .prose p{margin-bottom:10px}
+.section.tight.about-preview .prose p:last-of-type{margin-top:14px}
 
 /* Hero parallax — content drifts up slightly and fades as you scroll (Rockstar-style reveal) */
 .hero-parallax{
