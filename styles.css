@@ -653,15 +653,12 @@ footer.site .bottom .tag{color:var(--c-green);font-weight:600;letter-spacing:.08
 }
 .section-soft > *{position:relative;z-index:1}
 
-/* 7-card services grid — cleaner breakpoints, avoids orphan last row */
+/* 6-card services grid — 3 per row on desktop/tablet (3+3 layout) */
 .services.services-6{
   grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
   max-width:1180px;margin-inline:auto;
 }
-@media (min-width: 1100px){
-  .services.services-6{grid-template-columns:repeat(4, 1fr)}
-}
-@media (min-width: 780px) and (max-width: 1099px){
+@media (min-width: 780px){
   .services.services-6{grid-template-columns:repeat(3, 1fr)}
 }
 
