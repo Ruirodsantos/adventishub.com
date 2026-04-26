@@ -892,3 +892,135 @@ body.svc-creative main#main::after{
   body[class*="svc-"] main#main::before,
   body[class*="svc-"] main#main::after{display:none}
 }
+
+/* ==========================================================================
+   Analytics page — modern impact stats, capability grid & dashboard mockup
+   ========================================================================== */
+
+/* Impact grid (replaces 3-KPI strip) */
+.impact-grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+  max-width:1180px;margin-inline:auto;
+}
+.impact-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--c-border);
+  border-radius:var(--radius-lg);
+  padding:22px 22px 20px;
+  display:flex;flex-direction:column;gap:6px;
+  box-shadow:0 1px 0 rgba(42,7,83,0.04);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  overflow:hidden;
+}
+.impact-card::before{
+  content:"";
+  position:absolute;inset:0 0 auto 0;height:3px;
+  background:linear-gradient(90deg, var(--c-green), var(--c-purple));
+  opacity:.85;
+}
+.impact-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(42,7,83,0.10);
+  border-color:rgba(0,196,140,0.35);
+}
+.impact-icon{
+  width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  background:linear-gradient(135deg, rgba(0,196,140,0.16), rgba(0,196,140,0.04));
+  color:var(--c-green);
+  margin-bottom:8px;
+}
+.impact-icon svg{width:22px;height:22px}
+.impact-num{font-family:Lexend,system-ui,sans-serif;font-weight:800;line-height:1;
+  font-size:clamp(34px, 4.4vw, 48px);color:var(--c-purple);letter-spacing:-0.02em}
+.impact-title{font-weight:700;color:var(--c-purple);font-size:15.5px;margin-top:2px}
+.impact-desc{color:var(--c-text-soft);font-size:14px;line-height:1.55;margin:4px 0 0}
+
+/* Capability grid (replaces accordion) */
+.cap-grid{
+  display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  max-width:1180px;margin-inline:auto;
+}
+@media (min-width: 920px){
+  .cap-grid{grid-template-columns:repeat(3, 1fr)}
+}
+.cap-card{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--c-border);
+  border-radius:var(--radius-lg);
+  padding:24px 22px 22px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.cap-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 32px rgba(42,7,83,0.12);
+  border-color:rgba(0,196,140,0.35);
+}
+.cap-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg, rgba(42,7,83,0.10), rgba(0,196,140,0.10));
+  color:var(--c-purple);
+  margin-bottom:14px;
+}
+.cap-icon svg{width:24px;height:24px}
+.cap-card h3{font-size:18px;color:var(--c-purple);margin:0 0 8px;line-height:1.25}
+.cap-card p{color:var(--c-text-soft);font-size:14.5px;line-height:1.6;margin:0}
+
+/* Dashboard mockup (replaces 'Privacy by design' image) */
+.feature-media.dashboard-mock{
+  background:#fff;
+  padding:0;
+  overflow:hidden;
+}
+.dashboard-mock .dash-head{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  background:linear-gradient(180deg, #faf8ff, #f4f0fc);
+  border-bottom:1px solid var(--c-border);
+  font-size:12px;color:var(--c-text-soft);
+}
+.dashboard-mock .dash-dots{display:inline-flex;gap:5px}
+.dashboard-mock .dash-dots i{
+  width:9px;height:9px;border-radius:50%;background:#d6cce6;display:inline-block;
+}
+.dashboard-mock .dash-dots i:first-child{background:#ff5f57}
+.dashboard-mock .dash-dots i:nth-child(2){background:#febc2e}
+.dashboard-mock .dash-dots i:last-child{background:#28c840}
+.dashboard-mock .dash-title{font-weight:600;color:var(--c-purple);letter-spacing:.02em}
+.dashboard-mock .dash-body{padding:18px}
+.dashboard-mock .dash-kpis{
+  display:grid;grid-template-columns:repeat(3, 1fr);gap:10px;margin-bottom:14px;
+}
+.dashboard-mock .dash-kpi{
+  background:rgba(42,7,83,0.04);
+  border:1px solid rgba(42,7,83,0.06);
+  border-radius:10px;padding:10px 12px;
+  display:flex;flex-direction:column;gap:2px;
+}
+.dashboard-mock .dk-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--c-text-soft)}
+.dashboard-mock .dk-num{font-weight:800;font-size:20px;color:var(--c-purple);letter-spacing:-0.02em}
+.dashboard-mock .dk-trend{font-size:11.5px;font-weight:600}
+.dashboard-mock .dk-trend.up{color:#0ea96b}
+.dashboard-mock .dk-trend.down{color:#0ea96b} /* lower CAC is good */
+.dashboard-mock .dash-chart{
+  width:100%;height:120px;display:block;margin-bottom:14px;
+}
+.dashboard-mock .dash-rows{display:flex;flex-direction:column;gap:8px}
+.dashboard-mock .dash-row{
+  display:grid;grid-template-columns:90px 1fr 60px;gap:10px;align-items:center;
+  font-size:13px;color:var(--c-text-soft);
+}
+.dashboard-mock .dash-row .bar{
+  height:8px;background:rgba(42,7,83,0.06);border-radius:99px;overflow:hidden;display:block;
+}
+.dashboard-mock .dash-row .bar i{
+  display:block;height:100%;
+  background:linear-gradient(90deg, var(--c-green), #00a074);
+  border-radius:99px;
+}
+.dashboard-mock .dash-row .val{font-weight:700;color:var(--c-purple);text-align:right}

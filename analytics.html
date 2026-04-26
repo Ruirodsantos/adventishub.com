@@ -121,12 +121,42 @@
       <div class="container">
         <div class="section-head center reveal" style="margin-bottom:28px">
           <span class="eyebrow">Impact</span>
-          <h2>Results that move the business.</h2>
+          <h2 style="text-wrap:balance">Numbers that hold up to a CFO question.</h2>
+          <p class="lead" style="text-wrap:pretty">A modern analytics setup recovers data, sharpens decisions and gives time back to the team.</p>
         </div>
-        <div class="kpis reveal" data-kpis>
-          <div class="kpi"><div class="num" data-count="28" data-suffix="%">0%</div><div class="label">YouTube VTR lift</div></div>
-          <div class="kpi"><div class="num" data-count="30" data-suffix="+">0+</div><div class="label">Hours saved / month</div></div>
-          <div class="kpi"><div class="num" data-count="17" data-suffix="%">0%</div><div class="label">Repeat-purchase uplift</div></div>
+        <div class="impact-grid reveal" data-kpis>
+          <article class="impact-card">
+            <span class="impact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+            </span>
+            <div class="impact-num"><span class="num" data-count="35" data-suffix="%">0%</span></div>
+            <div class="impact-title">Tracking data recovered</div>
+            <p class="impact-desc">Server-side tagging and Conversions API close the gap left by iOS 14, ad-blockers and cookie loss.</p>
+          </article>
+          <article class="impact-card">
+            <span class="impact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div class="impact-num"><span class="num" data-count="30" data-suffix="+">0+</span></div>
+            <div class="impact-title">Hours saved per month</div>
+            <p class="impact-desc">Automated reporting and warehouse-native pipelines free your team from screenshots and manual exports.</p>
+          </article>
+          <article class="impact-card">
+            <span class="impact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
+            </span>
+            <div class="impact-num"><span class="num" data-count="100" data-suffix="%">0%</span></div>
+            <div class="impact-title">Data ownership</div>
+            <p class="impact-desc">Your data stays in your warehouse. We never lock you in and we never sell access on.</p>
+          </article>
+          <article class="impact-card">
+            <span class="impact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+            </span>
+            <div class="impact-num"><span class="num" data-count="25" data-suffix="%">0%</span></div>
+            <div class="impact-title">Conversions recovered</div>
+            <p class="impact-desc">Conversions API and modeled attribution typically recover a quarter of "missing" sales for Meta-led brands.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -136,79 +166,107 @@
         <div class="section-head reveal" style="max-width:none;margin-bottom:28px">
           <span class="eyebrow">What we deliver</span>
           <h2 style="text-wrap:balance">An analytics operating system, not a slide deck.</h2>
-          <p class="lead" style="text-wrap:pretty">We connect your media, product and commercial data, then deliver the insights that change outcomes.</p>
+          <p class="lead" style="text-wrap:pretty">We connect your media, product and commercial data, then turn it into the insights that change outcomes.</p>
         </div>
 
-        <div class="accordion reveal">
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">01</span><span class="title">Measurement frameworks &amp; planning</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>We start with the business, not the tag. KPI trees map directly to revenue, margin, LTV and CAC, with clear definitions and ownership for every metric. Event taxonomies, conversion definitions and data governance are documented so your tracking scales as the business grows.</p>
-              <p><strong>What you get:</strong> measurement plan, KPI dictionary, event spec, governance model and audit-ready documentation.</p>
-            </div></div>
+        <div class="cap-grid reveal">
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="19" cy="18" r="2.5"/></svg>
+            </span>
+            <h3>Measurement frameworks</h3>
+            <p>KPI trees, event taxonomies and governance, mapped to revenue, margin, LTV and CAC. Documented and audit-ready from day one.</p>
+          </article>
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M8 14l2 2 4-4"/></svg>
+            </span>
+            <h3>Tracking &amp; implementation</h3>
+            <p>GA4, Google Tag Manager (web and server-side), Firebase for mobile and Adobe Analytics. Full audits, rebuilds and clean handover documentation.</p>
+          </article>
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h6l2-3 2 6 2-3h4"/><circle cx="12" cy="12" r="9"/></svg>
+            </span>
+            <h3>Conversion recovery &amp; attribution</h3>
+            <p>Meta CAPI, Google Enhanced Conversions, TikTok Events API and modeled attribution. Recover lost conversions and defend budget with evidence, not guesswork.</p>
+          </article>
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18M5 7v12h14V7"/><path d="M9 11v5M12 11v5M15 11v5"/></svg>
+            </span>
+            <h3>Ecommerce &amp; funnel tracking</h3>
+            <p>Enhanced ecommerce for Shopify, WooCommerce, Magento and custom platforms. Lead-gen and SaaS funnels with drop-off and revenue attribution by source.</p>
+          </article>
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="2.5"/><path d="M4 6v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V6"/><path d="M4 12v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>
+            </span>
+            <h3>Data engineering &amp; warehouse</h3>
+            <p>BigQuery or Snowflake, modeled with dbt, fed by ELT pipelines. Segment or Tealium when activation matters. Single source of truth, owned by you.</p>
+          </article>
+          <article class="cap-card">
+            <span class="cap-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="13" r="2"/><circle cx="13" cy="18" r="2"/><path d="M9 12v3M11 9h3M14 14l2 3"/></svg>
+            </span>
+            <h3>Dashboards &amp; data science</h3>
+            <p>Looker Studio, Power BI and Tableau dashboards built around the questions they answer. Segmentation, propensity, churn and forecasting where it earns its keep.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tight" style="padding-top:clamp(8px,1.5vw,18px)">
+      <div class="container">
+        <div class="feature-row reveal">
+          <div class="feature-body">
+            <span class="eyebrow">From data to decisions</span>
+            <h2 style="text-wrap:balance">Dashboards built around the question, not the tool.</h2>
+            <p>Every chart earns its place by helping someone make a better call. We pair real-time signal with weekly narratives, anomaly alerts and drill-throughs into the underlying tables, so the leadership team, the marketing team and the product team are all working from the same numbers.</p>
+            <p style="margin-top:22px"><a href="contact.html" class="btn dark">See an example dashboard <span class="arrow">→</span></a></p>
           </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">02</span><span class="title">GA4, GTM &amp; mobile tracking</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Full implementation across web and app: GA4 with custom events and parameters, Google Tag Manager (with version control and naming conventions), Firebase for native iOS and Android, plus cross-platform user-journey stitching. We audit and rebuild legacy setups so the data your team relies on is actually trustworthy.</p>
-              <p><strong>What you get:</strong> clean GA4 + GTM (web &amp; mobile), enhanced ecommerce, custom events, debug suites and handover docs.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">03</span><span class="title">Server-side tracking (sGTM)</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>A Google Tag Manager Server-Side container moves tracking off the browser and onto your own infrastructure. That means iOS 14+ and ad-blocker losses get recovered, page performance improves, and you keep tight control over what data leaves your site. We design the container, route tags through it and harden security and consent end-to-end.</p>
-              <p><strong>Typical impact:</strong> 30–50% more event data captured versus client-side only, faster pages, lower data leakage risk.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">04</span><span class="title">Conversions API &amp; attribution</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Meta CAPI, Google Enhanced Conversions, TikTok Events API and equivalents for every major platform. We deduplicate against pixel data, send rich first-party signals to ad platforms and rebuild attribution where cookies fail. On top of that, we run multi-touch and modeled attribution so you can defend budget allocation with evidence, not guesswork.</p>
-              <p><strong>Typical impact:</strong> 20–40% conversions recovered for Meta-led brands, sharper ROAS, fewer "missing" outcomes in reporting.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">05</span><span class="title">Ecommerce &amp; funnel tracking</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Enhanced ecommerce for Shopify, WooCommerce, Magento and custom platforms, plus dedicated lead-gen and SaaS funnels. We track the full journey, from first ad impression to product view, cart, checkout, repeat purchase and lifecycle, then expose drop-off points so growth, product and creative teams can act on them.</p>
-              <p><strong>What you get:</strong> end-to-end funnel visibility, cart-abandonment signals, lead-quality scoring and revenue attribution by source.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">06</span><span class="title">Data engineering &amp; warehousing</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Warehouses in BigQuery or Snowflake, modeled with dbt and connected to Ads, CRM, payments, support and product data via ELT pipelines. Customer Data Platforms (Segment, Tealium) sit in front when activation matters. Daily QA, anomaly detection and SLAs keep trust high — and keep your data inside your own warehouse, under your own ownership.</p>
-              <p><strong>What you get:</strong> a single source of truth, automated pipelines, modeled tables and monitoring you can audit.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">07</span><span class="title">Dashboards, reporting &amp; enablement</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Executive overviews, squad-level dashboards and automated weekly summaries in Looker Studio, Power BI or Tableau. We focus on decisions, not screenshots: every dashboard is built around the question it answers, with thresholds, narratives and drill-throughs that turn numbers into action. Training and documentation make sure your teams keep using them after launch.</p>
-            </div></div>
-          </div>
-          <div class="acc-item">
-            <button class="acc-head" type="button">
-              <span class="num">08</span><span class="title">Data science &amp; AI</span><span class="symbol" aria-hidden="true">+</span>
-            </button>
-            <div class="acc-panel"><div class="acc-inner">
-              <p>Segmentation, propensity, churn and demand-forecasting models guide budget allocation and lifecycle flows. Marketing-mix and incrementality testing answer the bigger questions about what is really driving growth. When it pays off, we lean on Vertex AI and modern ML tooling — but only when there's a measurable lift on the other side.</p>
-            </div></div>
+          <div class="feature-media dashboard-mock" aria-hidden="true">
+            <div class="dash-head">
+              <span class="dash-dots"><i></i><i></i><i></i></span>
+              <span class="dash-title">Adventis · Performance overview</span>
+            </div>
+            <div class="dash-body">
+              <div class="dash-kpis">
+                <div class="dash-kpi"><span class="dk-label">Revenue</span><span class="dk-num">$3.2M</span><span class="dk-trend up">▲ 12.4%</span></div>
+                <div class="dash-kpi"><span class="dk-label">ROAS</span><span class="dk-num">4.8x</span><span class="dk-trend up">▲ 0.6x</span></div>
+                <div class="dash-kpi"><span class="dk-label">CAC</span><span class="dk-num">$24</span><span class="dk-trend down">▼ 8.1%</span></div>
+              </div>
+              <svg class="dash-chart" viewBox="0 0 320 120" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="dashFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#00C48C" stop-opacity=".35"/>
+                    <stop offset="100%" stop-color="#00C48C" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <g stroke="rgba(42,7,83,0.08)" stroke-width="1">
+                  <line x1="0" y1="30" x2="320" y2="30"/>
+                  <line x1="0" y1="60" x2="320" y2="60"/>
+                  <line x1="0" y1="90" x2="320" y2="90"/>
+                </g>
+                <path d="M0,90 C40,80 60,70 90,60 C120,50 150,55 180,40 C210,28 240,30 280,18 L320,12 L320,120 L0,120 Z" fill="url(#dashFill)"/>
+                <path d="M0,90 C40,80 60,70 90,60 C120,50 150,55 180,40 C210,28 240,30 280,18 L320,12" fill="none" stroke="#00C48C" stroke-width="2.2" stroke-linecap="round"/>
+                <g fill="#2A0753">
+                  <rect x="20" y="80" width="14" height="30" rx="2" opacity=".55"/>
+                  <rect x="60" y="65" width="14" height="45" rx="2" opacity=".55"/>
+                  <rect x="100" y="55" width="14" height="55" rx="2" opacity=".55"/>
+                  <rect x="140" y="48" width="14" height="62" rx="2" opacity=".55"/>
+                  <rect x="180" y="40" width="14" height="70" rx="2" opacity=".55"/>
+                  <rect x="220" y="30" width="14" height="80" rx="2" opacity=".55"/>
+                  <rect x="260" y="22" width="14" height="88" rx="2" opacity=".55"/>
+                </g>
+              </svg>
+              <div class="dash-rows">
+                <div class="dash-row"><span>Paid social</span><span class="bar"><i style="width:78%"></i></span><span class="val">$1.24M</span></div>
+                <div class="dash-row"><span>Paid search</span><span class="bar"><i style="width:62%"></i></span><span class="val">$0.98M</span></div>
+                <div class="dash-row"><span>Display</span><span class="bar"><i style="width:36%"></i></span><span class="val">$0.57M</span></div>
+                <div class="dash-row"><span>Organic</span><span class="bar"><i style="width:24%"></i></span><span class="val">$0.41M</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
