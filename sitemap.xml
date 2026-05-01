@@ -45,6 +45,13 @@
     <lastmod>2026-05-01</lastmod>
   </url>
 
+  <!-- Celebrities & Influencers -->
+  <url>
+    <loc>https://adventishub.com/celebrities.html</loc>
+    <priority>0.90</priority>
+    <lastmod>2026-05-01</lastmod>
+  </url>
+
   <!-- Media & Sponsorship -->
   <url>
     <loc>https://adventishub.com/media.html</loc>
