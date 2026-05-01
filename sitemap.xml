@@ -7,63 +7,63 @@
   <url>
     <loc>https://adventishub.com/</loc>
     <priority>1.0</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- About -->
   <url>
     <loc>https://adventishub.com/about.html</loc>
     <priority>0.95</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Analytics & Data Science -->
   <url>
     <loc>https://adventishub.com/analytics.html</loc>
     <priority>0.95</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Digital Advertising -->
   <url>
     <loc>https://adventishub.com/digital.html</loc>
     <priority>0.95</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- AI Performance Solutions -->
   <url>
     <loc>https://adventishub.com/ai.html</loc>
     <priority>0.92</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Gaming Partnerships -->
   <url>
     <loc>https://adventishub.com/gaming.html</loc>
     <priority>0.88</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Media & Sponsorship -->
   <url>
     <loc>https://adventishub.com/media.html</loc>
     <priority>0.90</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Creative & Development -->
   <url>
     <loc>https://adventishub.com/creative.html</loc>
     <priority>0.90</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
   <!-- Contact -->
   <url>
     <loc>https://adventishub.com/contact.html</loc>
     <priority>0.80</priority>
-    <lastmod>2026-04-16</lastmod>
+    <lastmod>2026-05-01</lastmod>
   </url>
 
 </urlset>
