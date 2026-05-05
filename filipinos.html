@@ -609,125 +609,127 @@
   <script src="scripts.js" defer></script>
 
   <script>
-    /* ── Google Sheets Events Calendar — by month ───────────────────────── */
+    /* ── Google Sheets Events Calendar — by month (JSONP, no CORS issues) ── */
     (function () {
       const SHEET_ID = '1s8_4DZh_Ph7hFPzVvkq5QtLDWmWaoTcliINP7QmkNsU';
-      // gviz endpoint handles CORS better than the export URL
-      const GVIZ_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=0';
-      const EXPORT_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=0';
 
       const MONTHS = ['January','February','March','April','May','June',
                       'July','August','September','October','November','December'];
 
-      /* ── CSV parser ── */
-      function parseLine(line) {
-        const cols = []; let cur = '', inQ = false;
-        for (let i = 0; i < line.length; i++) {
-          const c = line[i];
-          if (c === '"') { if (inQ && line[i+1]==='"'){cur+='"';i++;}else{inQ=!inQ;} }
-          else if (c===',' && !inQ){ cols.push(cur.trim()); cur=''; }
-          else { cur += c; }
-        }
-        cols.push(cur.trim()); return cols;
+      /* ── JSONP loader — bypasses CORS entirely ── */
+      function loadViaJsonp() {
+        return new Promise((resolve, reject) => {
+          const cb = '__gviz_' + Date.now();
+          const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID
+            + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&gid=0';
+          window[cb] = function(data) {
+            delete window[cb];
+            if (s.parentNode) s.parentNode.removeChild(s);
+            resolve(data);
+          };
+          const s = document.createElement('script');
+          s.src = url;
+          s.onerror = () => reject(new Error('JSONP failed'));
+          document.head.appendChild(s);
+          setTimeout(() => reject(new Error('Timeout')), 10000);
+        });
       }
 
-      function parseCSV(text) {
-        const lines = text.trim().split(/\r?\n/);
-        if (lines.length < 2) return [];
-        const headers = parseLine(lines[0]).map(h => h.replace(/^"|"$/g,'').trim());
-        const rows = [];
-        for (let i = 1; i < lines.length; i++) {
-          if (!lines[i].trim()) continue;
-          const vals = parseLine(lines[i]).map(v => v.replace(/^"|"$/g,'').trim());
+      /* ── Convert gviz response → array of plain row objects ── */
+      function gvizToRows(data) {
+        const cols = data.table.cols.map(c => c.label || c.id || '');
+        return (data.table.rows || []).map(r => {
           const row = {};
-          headers.forEach((h,idx) => { row[h] = vals[idx]||''; });
-          rows.push(row);
-        }
-        return rows;
+          (r.c || []).forEach((cell, i) => {
+            row[cols[i]] = cell && cell.v !== null && cell.v !== undefined ? String(cell.v) : '';
+          });
+          return row;
+        }).filter(row => Object.values(row).some(v => v.trim()));
       }
 
-      /* ── Field picker — case/whitespace insensitive ── */
+      /* ── Field picker ── */
       function pick(row, candidates) {
         for (const c of candidates) {
-          const key = Object.keys(row).find(k => k.toLowerCase().replace(/[\s_-]/g,'').includes(c.toLowerCase()));
+          const key = Object.keys(row).find(k =>
+            k.toLowerCase().replace(/[\s_\-]/g,'').includes(c.toLowerCase()));
           if (key && row[key] && row[key].trim()) return row[key].trim();
         }
+        // Last resort: return value by column index
         return '';
       }
 
-      /* ── Parse a date string into a JS Date ── */
+      /* ── Date parser ── */
       function parseDate(str) {
         if (!str) return null;
-        // Try native parse first
         let d = new Date(str);
         if (!isNaN(d)) return d;
-        // Try DD/MM/YYYY
-        const dmy = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
-        if (dmy) return new Date(+dmy[3]<100?2000+ +dmy[3]: +dmy[3], +dmy[2]-1, +dmy[1]);
+        // DD/MM/YYYY
+        const m = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+        if (m) return new Date(+m[3] < 100 ? 2000 + +m[3] : +m[3], +m[2]-1, +m[1]);
         return null;
       }
 
-      /* ── Group events by month ── */
+      /* ── Group by month ── */
       function groupByMonth(rows) {
-        const groups = {}; // key: "YYYY-MM" → { label, events[] }
-        const ungrouped = [];
-
+        const groups = {}, ungrouped = [];
         rows.forEach(row => {
-          const name = pick(row, ['event','name','title','evento','nome','activity']);
+          // Try to find event name from any column
+          const name = pick(row, ['event','name','title','evento','nome','activity','description'])
+            || Object.values(row).find(v => v && v.trim()) || '';
           if (!name) return;
 
-          const dateStr = pick(row, ['date','fecha','data','when','dia']);
+          const dateStr = pick(row, ['date','fecha','data','when','dia','start']);
           const d = parseDate(dateStr);
 
-          if (d) {
+          if (d && d.getFullYear() >= 2020) {
             const key = d.getFullYear() + '-' + String(d.getMonth()).padStart(2,'0');
             const label = MONTHS[d.getMonth()] + ' ' + d.getFullYear();
             if (!groups[key]) groups[key] = { label, sortKey: key, events: [] };
-            groups[key].events.push({ row, date: d, name });
+            groups[key].events.push({ row, date: d });
           } else {
-            ungrouped.push({ row, date: null, name, dateStr });
+            ungrouped.push({ row, date: null });
           }
         });
 
-        // Sort events within each month by day
         Object.values(groups).forEach(g => g.events.sort((a,b) => a.date - b.date));
-
-        // Sort months chronologically
         const sorted = Object.values(groups).sort((a,b) => a.sortKey.localeCompare(b.sortKey));
-
-        if (ungrouped.length) {
-          sorted.push({ label: 'Date TBC', sortKey: 'z', events: ungrouped.map(e => ({...e})) });
-        }
+        if (ungrouped.length) sorted.push({ label: 'Date TBC', sortKey: 'z', events: ungrouped });
         return sorted;
       }
 
-      /* ── Render a single event card ── */
+      /* ── Render a card ── */
       function renderCard(row, dateObj) {
-        const name     = pick(row, ['event','name','title','evento','nome','activity']);
-        const time     = pick(row, ['time','hora','heure','start']);
-        const location = pick(row, ['location','venue','place','lugar','local','where']);
-        const desc     = pick(row, ['description','details','info','desc','notes','about']);
-        const link     = pick(row, ['link','url','register','ticket','website','rsvp']);
+        const keys = Object.keys(row);
+        // Try common column names, then fall back to positional
+        const get = (candidates, idx) =>
+          pick(row, candidates) || (keys[idx] ? row[keys[idx]] : '') || '';
+
+        const name     = get(['event','name','title','evento','activity'], 0);
+        const date2    = get(['date','fecha','data','when'], 1);
+        const time     = get(['time','hora','hour','start'], 2);
+        const location = get(['location','venue','place','where','local'], 3);
+        const desc     = get(['description','details','info','desc','notes','about'], 4);
+        const link     = get(['link','url','register','ticket','rsvp','website'], 5);
 
         const dayStr = dateObj
           ? dateObj.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})
-          : '';
+          : (date2 || '');
 
         return [
           '<div class="event-card">',
-          dayStr ? '<span class="event-date-badge">📅 ' + dayStr + (time ? ' · '+time : '') + '</span>' : '',
-          '<div class="event-name">' + name + '</div>',
-          location ? '<div class="event-location">📍 ' + location + '</div>' : '',
-          desc ? '<p class="event-desc">' + desc + '</p>' : '',
-          link ? '<a href="' + link + '" class="event-link" target="_blank" rel="noopener">More info →</a>' : '',
+          dayStr ? `<span class="event-date-badge">📅 ${dayStr}${time ? ' · '+time : ''}</span>` : '',
+          `<div class="event-name">${name}</div>`,
+          location ? `<div class="event-location">📍 ${location}</div>` : '',
+          desc && desc !== name ? `<p class="event-desc">${desc}</p>` : '',
+          link ? `<a href="${link}" class="event-link" target="_blank" rel="noopener">More info →</a>` : '',
           '</div>'
         ].join('');
       }
 
-      /* ── Render all groups ── */
+      /* ── Render all month groups ── */
       function renderGroups(groups) {
         if (!groups.length) {
-          return '<div class="events-state"><strong>No events found</strong><p>Joy hasn\'t added events yet — check back soon.</p></div>';
+          return '<div class="events-state"><strong>No events yet</strong><p>Joy will be adding events soon — check back shortly.</p></div>';
         }
         return groups.map(g => `
           <div class="month-group">
@@ -738,31 +740,18 @@
           </div>`).join('');
       }
 
-      /* ── Fetch with fallback ── */
+      /* ── Main ── */
       async function loadEvents() {
-        let text = null;
-        // Try gviz endpoint first (better CORS support)
         try {
-          const r1 = await fetch(GVIZ_URL);
-          if (r1.ok) text = await r1.text();
-        } catch(_) {}
-        // Fallback to export URL
-        if (!text) {
-          try {
-            const r2 = await fetch(EXPORT_URL);
-            if (r2.ok) text = await r2.text();
-          } catch(_) {}
-        }
-
-        if (!text) {
+          const data = await loadViaJsonp();
+          const rows = gvizToRows(data);
+          document.getElementById('events-container').innerHTML = renderGroups(groupByMonth(rows));
+        } catch (e) {
           document.getElementById('events-container').innerHTML =
-            '<div class="events-state"><strong>Events coming soon</strong><p>Could not load the calendar right now. <a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the latest schedule.</p></div>';
-          return;
+            '<div class="events-state"><strong>Calendar loading…</strong>'
+            + '<p>If events don\'t appear, make sure the Google Sheet is set to <em>Anyone with the link can view</em>. '
+            + '<a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the full schedule.</p></div>';
         }
-
-        const rows = parseCSV(text);
-        const groups = groupByMonth(rows);
-        document.getElementById('events-container').innerHTML = renderGroups(groups);
       }
 
       loadEvents();
