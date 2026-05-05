@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Filipino Market Expertise — Adventis</title>
+  <meta name="description" content="Adventis brings deep cultural insight, community activations and targeted campaigns for Filipino audiences across the UAE and global markets. Trusted by TFC, TapTap Send, Botim and more." />
+  <link rel="canonical" href="https://adventishub.com/filipinos.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Filipino Market Expertise — Adventis" />
+  <meta property="og:description" content="Deep understanding of Filipino audiences across UAE and global markets — cultural insight, community activations and targeted campaigns." />
+  <meta property="og:image" content="https://adventishub.com/images/adventis-preview.png" />
+  <meta property="og:url" content="https://adventishub.com/filipinos.html" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0038A8" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ===== Philippine flag palette ===== */
+    :root {
+      --ph-blue:  #0038A8;
+      --ph-red:   #CE1126;
+      --ph-gold:  #FCD116;
+      --ph-navy:  #001F5B;
+      --ph-dark:  #030B1D;
+    }
+
+    body.svc-filipinos {
+      background: var(--ph-dark);
+      color: #fff;
+    }
+
+    /* Header */
+    body.svc-filipinos header.site {
+      background: rgba(3,11,29,0.96);
+      border-bottom-color: rgba(0,56,168,0.3);
+      backdrop-filter: blur(12px);
+    }
+    body.svc-filipinos header.site nav a,
+    body.svc-filipinos header.site .dropbtn {
+      color: #c8d8f8;
+    }
+    body.svc-filipinos header.site nav a:hover { color: #fff; }
+    body.svc-filipinos header.site .dropdown-content {
+      background: #001A4D;
+      border-color: rgba(0,56,168,0.4);
+    }
+    body.svc-filipinos header.site .dropdown-content a { color: #c8d8f8; }
+    body.svc-filipinos header.site .dropdown-content a:hover { color: var(--ph-gold); background: rgba(0,56,168,0.2); }
+
+    /* Drawer */
+    body.svc-filipinos .drawer { background: #001035; }
+    body.svc-filipinos .drawer a { color: #c8d8f8; }
+    body.svc-filipinos .drawer summary { color: #c8d8f8; }
+
+    /* Scroll progress */
+    body.svc-filipinos .scroll-progress span { background: var(--ph-gold); }
+
+    /* Filipino nav badge — used on this page (other pages use inline style) */
+    .nav-ph-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--ph-blue) !important;
+      color: var(--ph-gold) !important;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none !important;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .nav-ph-badge:hover { background: #0044cc !important; }
+
+    /* ── Hero ── */
+    .hero-ph {
+      position: relative;
+      overflow: hidden;
+      padding: 110px 0 90px;
+      background: linear-gradient(150deg, #030B1D 0%, #001A4D 55%, #0038A8 100%);
+    }
+    /* Top stripe: blue | red */
+    .hero-ph::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--ph-blue) 50%, var(--ph-red) 50%);
+    }
+    /* Bottom gold line */
+    .hero-ph::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--ph-gold);
+    }
+    .hero-ph-flag {
+      position: absolute;
+      right: max(-40px, -4vw);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: clamp(160px, 20vw, 300px);
+      opacity: 0.06;
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+    }
+    .hero-ph .breadcrumbs {
+      font-size: 13px;
+      color: rgba(200,216,248,0.65);
+      margin-bottom: 28px;
+    }
+    .hero-ph .breadcrumbs a { color: inherit; text-decoration: none; }
+    .hero-ph .breadcrumbs a:hover { color: #fff; }
+    .hero-ph .breadcrumbs span { margin: 0 6px; }
+    .hero-ph h1 {
+      font-size: clamp(38px, 6.5vw, 72px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 22px;
+      max-width: 700px;
+    }
+    .hero-ph h1 .grad-ph {
+      background: linear-gradient(135deg, var(--ph-gold) 0%, #ffe97a 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-ph .lead {
+      font-size: clamp(16px, 1.4vw, 20px);
+      color: rgba(200,216,248,0.82);
+      max-width: 580px;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
+    .trusted-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .trusted-strip .label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ph-gold);
+      margin-right: 4px;
+    }
+    .brand-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.82);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── Stripe divider ── */
+    .ph-stripe {
+      height: 6px;
+      background: linear-gradient(90deg, var(--ph-blue) 50%, var(--ph-red) 50%);
+    }
+
+    /* ── Shared section styles ── */
+    .ph-section {
+      padding: 88px 0;
+      background: var(--ph-dark);
+    }
+    .ph-section-navy {
+      padding: 88px 0;
+      background: linear-gradient(180deg, #001A4D 0%, #001035 100%);
+    }
+    .ph-section-events {
+      padding: 88px 0;
+      background: linear-gradient(180deg, #001035 0%, var(--ph-dark) 100%);
+    }
+
+    .ph-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--ph-gold);
+      margin-bottom: 14px;
+    }
+    .ph-h2 {
+      font-size: clamp(26px, 3.5vw, 42px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .ph-p {
+      color: rgba(200,216,248,0.75);
+      font-size: clamp(15px, 1.1vw, 17px);
+      max-width: 660px;
+      line-height: 1.65;
+      margin-bottom: 52px;
+    }
+
+    /* ── Expertise cards ── */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .expertise-card {
+      background: rgba(0,56,168,0.10);
+      border: 1px solid rgba(0,56,168,0.35);
+      border-top: 3px solid var(--ph-blue);
+      border-radius: 16px;
+      padding: 34px 28px;
+      transition: border-top-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .expertise-card:hover {
+      border-top-color: var(--ph-gold);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .expertise-card .card-icon {
+      font-size: 38px;
+      margin-bottom: 20px;
+      display: block;
+    }
+    .expertise-card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ph-gold);
+      margin-bottom: 12px;
+    }
+    .expertise-card p {
+      color: rgba(200,216,248,0.78);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── Stats row ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-item .stat-number {
+      font-size: clamp(38px, 5.5vw, 60px);
+      font-weight: 800;
+      color: var(--ph-gold);
+      line-height: 1;
+    }
+    .stat-item .stat-label {
+      color: rgba(200,216,248,0.7);
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    /* ── Events calendar ── */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 44px;
+    }
+    .event-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,56,168,0.28);
+      border-left: 4px solid var(--ph-blue);
+      border-radius: 12px;
+      padding: 26px 24px;
+      transition: border-left-color 0.2s, transform 0.2s;
+    }
+    .event-card:hover {
+      border-left-color: var(--ph-gold);
+      transform: translateX(4px);
+    }
+    .event-date-badge {
+      display: inline-block;
+      background: var(--ph-blue);
+      color: var(--ph-gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    .event-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .event-location {
+      font-size: 13px;
+      color: rgba(200,216,248,0.6);
+      margin-bottom: 10px;
+    }
+    .event-desc {
+      font-size: 14px;
+      color: rgba(200,216,248,0.72);
+      line-height: 1.55;
+    }
+    .event-link {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ph-gold);
+      text-decoration: none;
+    }
+    .event-link:hover { text-decoration: underline; }
+
+    .events-state {
+      text-align: center;
+      padding: 64px 20px;
+    }
+    .events-state p {
+      color: rgba(200,216,248,0.5);
+      font-size: 16px;
+      margin-top: 12px;
+    }
+    .events-state strong {
+      display: block;
+      color: rgba(200,216,248,0.7);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0,56,168,0.3);
+      border-top-color: var(--ph-gold);
+      border-radius: 50%;
+      animation: ph-spin 0.8s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes ph-spin { to { transform: rotate(360deg); } }
+
+    /* ── CTA band override ── */
+    body.svc-filipinos .cta-band {
+      background: linear-gradient(135deg, rgba(0,56,168,0.2) 0%, rgba(206,17,38,0.1) 100%);
+      border: 1px solid rgba(252,209,22,0.18);
+    }
+    body.svc-filipinos .cta-band h2 { color: #fff; }
+    body.svc-filipinos .cta-band p { color: rgba(200,216,248,0.75); }
+    body.svc-filipinos .btn {
+      background: var(--ph-gold);
+      color: #030B1D;
+    }
+    body.svc-filipinos .btn:hover { background: #ffe040; }
+
+    /* ── Footer override ── */
+    body.svc-filipinos footer.site {
+      background: #020810;
+      border-top: 1px solid rgba(0,56,168,0.25);
+    }
+    body.svc-filipinos footer.site h5 { color: #fff; }
+    body.svc-filipinos footer.site a,
+    body.svc-filipinos footer.site p,
+    body.svc-filipinos footer.site span { color: rgba(200,216,248,0.65); }
+    body.svc-filipinos footer.site a:hover { color: var(--ph-gold); }
+    body.svc-filipinos footer.site .bottom { border-top-color: rgba(0,56,168,0.2); }
+
+    /* ── Responsive ── */
+    @media (max-width:640px) {
+      .expertise-grid,
+      .events-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6XZWPZP2N5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6XZWPZP2N5');
+  </script>
+</head>
+<body class="svc-filipinos">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site">
+    <a href="index.html" class="logo" aria-label="Adventis — home">
+      <img src="images/Website_Adventis_Logo.png" alt="Adventis" width="160" height="34" />
+    </a>
+    <nav aria-label="Main">
+      <a href="about.html">About</a>
+      <div class="dropdown">
+        <button class="dropbtn" aria-haspopup="true" aria-expanded="false">Services</button>
+        <div class="dropdown-content" role="menu">
+          <a href="analytics.html" role="menuitem"><span class="dot"></span> Analytics &amp; Data Science</a>
+          <a href="digital.html" role="menuitem"><span class="dot"></span> Digital Advertising</a>
+          <a href="ai.html" role="menuitem"><span class="dot"></span> AI Performance Solutions</a>
+          <a href="media.html" role="menuitem"><span class="dot"></span> Media &amp; Sponsorship</a>
+          <a href="celebrities.html" role="menuitem"><span class="dot"></span> Celebrities &amp; Influencers</a>
+          <a href="creative.html" role="menuitem"><span class="dot"></span> Creative &amp; Development</a>
+        </div>
+      </div>
+      <a href="filipinos.html" class="nav-ph-badge" aria-current="page">🇵🇭 Filipino Market</a>
+      <a href="contact.html" class="cta">Contact</a>
+    </nav>
+    <button id="burger" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
+  </header>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <a href="about.html">About Us</a>
+    <details>
+      <summary>Services</summary>
+      <a href="analytics.html">Analytics &amp; Data Science</a>
+      <a href="digital.html">Digital Advertising</a>
+      <a href="ai.html">AI Performance Solutions</a>
+      <a href="media.html">Media &amp; Sponsorship</a>
+      <a href="celebrities.html">Celebrities &amp; Influencers</a>
+      <a href="creative.html">Creative &amp; Development</a>
+    </details>
+    <a href="filipinos.html">🇵🇭 Filipino Market</a>
+    <a href="contact.html">Contact Us</a>
+  </aside>
+
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <main id="main">
+
+    <!-- ── Hero ── -->
+    <section class="hero-ph">
+      <div class="hero-ph-flag" aria-hidden="true">🇵🇭</div>
+      <div class="container">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <span>Filipino Market</span>
+        </div>
+        <h1><span class="grad-ph">Filipino Market</span><br>Expertise.</h1>
+        <p class="lead">Deep understanding of Filipino audiences across UAE and global markets — from cultural insight to performance campaigns that drive real, measurable results.</p>
+        <div class="trusted-strip">
+          <span class="label">Trusted by:</span>
+          <span class="brand-pill">TFC</span>
+          <span class="brand-pill">TapTap Send</span>
+          <span class="brand-pill">DaytoDay</span>
+          <span class="brand-pill">Botim</span>
+          <span class="brand-pill">Cashnow</span>
+          <span class="brand-pill">Yakult</span>
+          <span class="brand-pill">Emami</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ph-stripe" aria-hidden="true"></div>
+
+    <!-- ── Expertise ── -->
+    <section class="ph-section">
+      <div class="container">
+        <span class="ph-eyebrow">Our Expertise</span>
+        <h2 class="ph-h2">How we reach Filipino audiences.</h2>
+        <p class="ph-p">With over a million Filipinos living and working in the UAE, this is one of the most engaged and brand-loyal communities in the region. We know how to reach them — and how to make campaigns resonate.</p>
+        <div class="expertise-grid">
+          <div class="expertise-card reveal">
+            <span class="card-icon">🧠</span>
+            <h3>Cultural Insight</h3>
+            <p>Understanding behavior, values, and decision drivers within the Filipino community. We know what matters — from OFW remittance priorities to entertainment preferences and the trust signals that move people to act.</p>
+          </div>
+          <div class="expertise-card reveal">
+            <span class="card-icon">👥</span>
+            <h3>Community Activations</h3>
+            <p>TFC &amp; other Filipino events, sponsorships and on-ground presence to drive real engagement. We connect brands to the places and moments where the Filipino community gathers, celebrates and makes decisions.</p>
+          </div>
+          <div class="expertise-card reveal">
+            <span class="card-icon">🎯</span>
+            <h3>Targeted Campaigns</h3>
+            <p>Culturally adapted messaging, precise audience targeting, and platform optimisation across Facebook, TikTok, Filipino media channels and more. Every dirham placed with purpose and tracked to outcome.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Stats ── -->
+    <section class="ph-section-navy">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item reveal">
+            <div class="stat-number">1M+</div>
+            <div class="stat-label">Filipinos in the UAE — the largest expat community</div>
+          </div>
+          <div class="stat-item reveal">
+            <div class="stat-number">7+</div>
+            <div class="stat-label">Brands we've grown in this market</div>
+          </div>
+          <div class="stat-item reveal">
+            <div class="stat-number">UAE</div>
+            <div class="stat-label">Based in Dubai, serving globally</div>
+          </div>
+          <div class="stat-item reveal">
+            <div class="stat-number">🇵🇭</div>
+            <div class="stat-label">Filipino-led team with first-hand cultural knowledge</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Events Calendar ── -->
+    <section class="ph-section-events">
+      <div class="container">
+        <span class="ph-eyebrow">Community Calendar</span>
+        <h2 class="ph-h2">Filipino Events in the UAE.</h2>
+        <p class="ph-p" style="margin-bottom:0">Upcoming Filipino community events, festivals and activations. Updated live — no refresh needed.</p>
+        <div id="events-container">
+          <div class="events-state" id="events-loading">
+            <div class="spinner"></div>
+            <p>Loading events…</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="ph-section" style="padding-top:0">
+      <div class="container">
+        <div class="cta-band reveal">
+          <div>
+            <h2>Ready to reach the Filipino market?</h2>
+            <p>Share a brief or say hello. We'll come back with a clear plan.</p>
+          </div>
+          <a href="contact.html" class="btn">Contact us <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site">
+    <div class="container">
+      <div class="row">
+        <div class="brand">
+          <img src="images/Website_Adventis_Logo.png" alt="Adventis" />
+          <p>Performance marketing, analytics and creative for brands that want measurable growth.</p>
+        </div>
+        <div>
+          <h5>Services</h5>
+          <a href="analytics.html">Analytics &amp; Data Science</a>
+          <a href="digital.html">Digital Advertising</a>
+          <a href="ai.html">AI Performance Solutions</a>
+          <a href="media.html">Media &amp; Sponsorship</a>
+          <a href="celebrities.html">Celebrities &amp; Influencers</a>
+          <a href="creative.html">Creative &amp; Development</a>
+        </div>
+        <div>
+          <h5>Company</h5>
+          <a href="about.html">About</a>
+          <a href="filipinos.html">Filipino Market</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h5>Based in</h5>
+          <span style="display:block;padding:5px 0;font-size:14.5px">Dubai, UAE</span>
+          <span style="display:block;padding:5px 0;font-size:14.5px">Serving globally</span>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© <span id="year">2026</span> Adventis L.L.C.-FZ. All rights reserved.</span>
+        <span class="tag">STRATEGY · MEDIA · RESULTS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="scripts.js" defer></script>
+
+  <script>
+    /* ── Google Sheets Events Calendar ──────────────────────────────────── */
+    (function () {
+      const SHEET_ID = '1s8_4DZh_Ph7hFPzVvkq5QtLDWmWaoTcliINP7QmkNsU';
+      const GID      = '0';
+      const URL      = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + GID;
+
+      /* Robust CSV parser — handles quoted fields with commas inside */
+      function parseLine(line) {
+        const cols = [];
+        let cur = '', inQ = false;
+        for (let i = 0; i < line.length; i++) {
+          const c = line[i];
+          if (c === '"') {
+            if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
+            else { inQ = !inQ; }
+          } else if (c === ',' && !inQ) {
+            cols.push(cur.trim()); cur = '';
+          } else { cur += c; }
+        }
+        cols.push(cur.trim());
+        return cols;
+      }
+
+      function parseCSV(text) {
+        const lines = text.trim().split(/\r?\n/);
+        if (lines.length < 2) return { headers: [], rows: [] };
+        const headers = parseLine(lines[0]).map(h => h.replace(/^"|"$/g, ''));
+        const rows = [];
+        for (let i = 1; i < lines.length; i++) {
+          if (!lines[i].trim()) continue;
+          const vals = parseLine(lines[i]).map(v => v.replace(/^"|"$/g, ''));
+          const row = {};
+          headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+          rows.push(row);
+        }
+        return { headers, rows };
+      }
+
+      /* Find a field value by trying multiple candidate keys */
+      function pick(row, candidates) {
+        for (const c of candidates) {
+          const key = Object.keys(row).find(k => k.toLowerCase().replace(/\s/g,'').includes(c));
+          if (key && row[key]) return row[key];
+        }
+        return '';
+      }
+
+      function renderEvents(rows) {
+        const validRows = rows.filter(r => pick(r, ['event','name','title','evento']));
+        if (!validRows.length) {
+          return '<div class="events-state"><strong>No upcoming events</strong><p>New events are added regularly — check back soon.</p></div>';
+        }
+        return '<div class="events-grid">' + validRows.map(row => {
+          const name     = pick(row, ['event','name','title','evento','nome']);
+          const date     = pick(row, ['date','fecha','data']);
+          const time     = pick(row, ['time','hora']);
+          const location = pick(row, ['location','venue','place','lugar','local']);
+          const desc     = pick(row, ['description','details','info','desc','notes']);
+          const link     = pick(row, ['link','url','register','ticket','website']);
+          const dateStr  = date ? (time ? date + ' · ' + time : date) : '';
+          return [
+            '<div class="event-card">',
+            dateStr ? '<span class="event-date-badge">📅 ' + dateStr + '</span>' : '',
+            '<div class="event-name">' + name + '</div>',
+            location ? '<div class="event-location">📍 ' + location + '</div>' : '',
+            desc ? '<p class="event-desc">' + desc + '</p>' : '',
+            link ? '<a href="' + link + '" class="event-link" target="_blank" rel="noopener">More info →</a>' : '',
+            '</div>'
+          ].join('');
+        }).join('') + '</div>';
+      }
+
+      async function loadEvents() {
+        try {
+          const res = await fetch(URL);
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const text = await res.text();
+          const { rows } = parseCSV(text);
+          document.getElementById('events-container').innerHTML = renderEvents(rows);
+        } catch (e) {
+          document.getElementById('events-container').innerHTML =
+            '<div class="events-state"><strong>Events coming soon</strong><p>Could not load events right now. <a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the latest schedule.</p></div>';
+        }
+      }
+
+      loadEvents();
+    })();
+  </script>
+</body>
+</html>
