@@ -609,14 +609,14 @@
   <script src="scripts.js" defer></script>
 
   <script>
-    /* ── Google Sheets Events Calendar — by month (JSONP, no CORS issues) ── */
+    /* ── Filipino Events Calendar — reads month-grid spreadsheet via JSONP ── */
     (function () {
       const SHEET_ID = '1s8_4DZh_Ph7hFPzVvkq5QtLDWmWaoTcliINP7QmkNsU';
 
-      const MONTHS = ['January','February','March','April','May','June',
-                      'July','August','September','October','November','December'];
+      const MONTH_NAMES = ['January','February','March','April','May','June',
+                           'July','August','September','October','November','December'];
 
-      /* ── JSONP loader — bypasses CORS entirely ── */
+      /* ── JSONP — bypasses CORS ── */
       function loadViaJsonp() {
         return new Promise((resolve, reject) => {
           const cb = '__gviz_' + Date.now();
@@ -629,105 +629,80 @@
           };
           const s = document.createElement('script');
           s.src = url;
-          s.onerror = () => reject(new Error('JSONP failed'));
+          s.onerror = () => reject(new Error('Script load failed'));
           document.head.appendChild(s);
-          setTimeout(() => reject(new Error('Timeout')), 10000);
+          setTimeout(() => reject(new Error('Timeout')), 12000);
         });
       }
 
-      /* ── Convert gviz response → array of plain row objects ── */
-      function gvizToRows(data) {
-        const cols = data.table.cols.map(c => c.label || c.id || '');
-        return (data.table.rows || []).map(r => {
-          const row = {};
-          (r.c || []).forEach((cell, i) => {
-            row[cols[i]] = cell && cell.v !== null && cell.v !== undefined ? String(cell.v) : '';
+      /* ─────────────────────────────────────────────────────────────────────
+         Parse the month-grid spreadsheet:
+         - Row 6 (0-indexed row 5) contains month names as column headers
+         - Each subsequent row contains events; the column tells us the month
+         - Each cell may contain multiline text: line 1 = event name,
+           remaining lines = details (date, venue, attendees, etc.)
+      ───────────────────────────────────────────────────────────────────── */
+      function parseMonthGrid(data) {
+        const rows = data.table.rows || [];
+        const colToMonthIdx = {}; // column index → 0-11
+
+        // Step 1: find the header row with month names
+        let headerRowIdx = -1;
+        for (let ri = 0; ri < rows.length; ri++) {
+          const cells = rows[ri].c || [];
+          let hits = 0;
+          cells.forEach((cell, ci) => {
+            const v = cell && cell.v != null ? String(cell.v).trim() : '';
+            const mi = MONTH_NAMES.findIndex(m => m.toLowerCase() === v.toLowerCase());
+            if (mi >= 0) { colToMonthIdx[ci] = mi; hits++; }
           });
-          return row;
-        }).filter(row => Object.values(row).some(v => v.trim()));
-      }
-
-      /* ── Field picker ── */
-      function pick(row, candidates) {
-        for (const c of candidates) {
-          const key = Object.keys(row).find(k =>
-            k.toLowerCase().replace(/[\s_\-]/g,'').includes(c.toLowerCase()));
-          if (key && row[key] && row[key].trim()) return row[key].trim();
+          if (hits >= 6) { headerRowIdx = ri; break; }
         }
-        // Last resort: return value by column index
-        return '';
+
+        if (headerRowIdx < 0) return [];
+
+        // Step 2: extract events from rows below the header
+        const byMonth = {}; // monthIdx → events[]
+        for (let ri = headerRowIdx + 1; ri < rows.length; ri++) {
+          const cells = rows[ri].c || [];
+          cells.forEach((cell, ci) => {
+            if (!(ci in colToMonthIdx)) return;
+            const raw = cell && cell.v != null ? String(cell.v).trim() : '';
+            if (!raw) return;
+
+            const monthIdx = colToMonthIdx[ci];
+            // Split on real newlines; gviz uses \n
+            const lines = raw.split(/\n/).map(l => l.trim()).filter(Boolean);
+            const name    = lines[0];
+            const details = lines.slice(1);
+
+            if (!byMonth[monthIdx]) byMonth[monthIdx] = [];
+            byMonth[monthIdx].push({ name, details });
+          });
+        }
+
+        // Step 3: build sorted month groups
+        return MONTH_NAMES
+          .map((label, mi) => ({ label, monthIdx: mi, events: byMonth[mi] || [] }))
+          .filter(g => g.events.length > 0);
       }
 
-      /* ── Date parser ── */
-      function parseDate(str) {
-        if (!str) return null;
-        let d = new Date(str);
-        if (!isNaN(d)) return d;
-        // DD/MM/YYYY
-        const m = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
-        if (m) return new Date(+m[3] < 100 ? 2000 + +m[3] : +m[3], +m[2]-1, +m[1]);
-        return null;
+      /* ── Render one event card ── */
+      function renderCard(event) {
+        const { name, details } = event;
+        // Look for a date-like line and a location-like line in details
+        const dateLine = details.find(l => /\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d{4}/i.test(l));
+        const otherDetails = details.filter(l => l !== dateLine);
+
+        return `<div class="event-card">
+          ${dateLine ? `<span class="event-date-badge">📅 ${dateLine}</span>` : ''}
+          <div class="event-name">${name}</div>
+          ${otherDetails.map(d => `<p class="event-desc">${d}</p>`).join('')}
+        </div>`;
       }
 
-      /* ── Group by month ── */
-      function groupByMonth(rows) {
-        const groups = {}, ungrouped = [];
-        rows.forEach(row => {
-          // Try to find event name from any column
-          const name = pick(row, ['event','name','title','evento','nome','activity','description'])
-            || Object.values(row).find(v => v && v.trim()) || '';
-          if (!name) return;
-
-          const dateStr = pick(row, ['date','fecha','data','when','dia','start']);
-          const d = parseDate(dateStr);
-
-          if (d && d.getFullYear() >= 2020) {
-            const key = d.getFullYear() + '-' + String(d.getMonth()).padStart(2,'0');
-            const label = MONTHS[d.getMonth()] + ' ' + d.getFullYear();
-            if (!groups[key]) groups[key] = { label, sortKey: key, events: [] };
-            groups[key].events.push({ row, date: d });
-          } else {
-            ungrouped.push({ row, date: null });
-          }
-        });
-
-        Object.values(groups).forEach(g => g.events.sort((a,b) => a.date - b.date));
-        const sorted = Object.values(groups).sort((a,b) => a.sortKey.localeCompare(b.sortKey));
-        if (ungrouped.length) sorted.push({ label: 'Date TBC', sortKey: 'z', events: ungrouped });
-        return sorted;
-      }
-
-      /* ── Render a card ── */
-      function renderCard(row, dateObj) {
-        const keys = Object.keys(row);
-        // Try common column names, then fall back to positional
-        const get = (candidates, idx) =>
-          pick(row, candidates) || (keys[idx] ? row[keys[idx]] : '') || '';
-
-        const name     = get(['event','name','title','evento','activity'], 0);
-        const date2    = get(['date','fecha','data','when'], 1);
-        const time     = get(['time','hora','hour','start'], 2);
-        const location = get(['location','venue','place','where','local'], 3);
-        const desc     = get(['description','details','info','desc','notes','about'], 4);
-        const link     = get(['link','url','register','ticket','rsvp','website'], 5);
-
-        const dayStr = dateObj
-          ? dateObj.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})
-          : (date2 || '');
-
-        return [
-          '<div class="event-card">',
-          dayStr ? `<span class="event-date-badge">📅 ${dayStr}${time ? ' · '+time : ''}</span>` : '',
-          `<div class="event-name">${name}</div>`,
-          location ? `<div class="event-location">📍 ${location}</div>` : '',
-          desc && desc !== name ? `<p class="event-desc">${desc}</p>` : '',
-          link ? `<a href="${link}" class="event-link" target="_blank" rel="noopener">More info →</a>` : '',
-          '</div>'
-        ].join('');
-      }
-
-      /* ── Render all month groups ── */
-      function renderGroups(groups) {
+      /* ── Render all month sections ── */
+      function renderAll(groups) {
         if (!groups.length) {
           return '<div class="events-state"><strong>No events yet</strong><p>Joy will be adding events soon — check back shortly.</p></div>';
         }
@@ -735,7 +710,7 @@
           <div class="month-group">
             <div class="month-label"><span>${g.label}</span></div>
             <div class="events-grid">
-              ${g.events.map(e => renderCard(e.row, e.date)).join('')}
+              ${g.events.map(renderCard).join('')}
             </div>
           </div>`).join('');
       }
@@ -744,12 +719,12 @@
       async function loadEvents() {
         try {
           const data = await loadViaJsonp();
-          const rows = gvizToRows(data);
-          document.getElementById('events-container').innerHTML = renderGroups(groupByMonth(rows));
+          const groups = parseMonthGrid(data);
+          document.getElementById('events-container').innerHTML = renderAll(groups);
         } catch (e) {
           document.getElementById('events-container').innerHTML =
             '<div class="events-state"><strong>Calendar loading…</strong>'
-            + '<p>If events don\'t appear, make sure the Google Sheet is set to <em>Anyone with the link can view</em>. '
+            + '<p>Make sure the Google Sheet is shared as <em>Anyone with the link — Viewer</em>. '
             + '<a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the full schedule.</p></div>';
         }
       }
