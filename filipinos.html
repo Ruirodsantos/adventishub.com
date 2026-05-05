@@ -42,6 +42,10 @@
       border-bottom-color: rgba(0,56,168,0.3);
       backdrop-filter: blur(12px);
     }
+    /* Make logo visible on dark background */
+    body.svc-filipinos header.site .logo img {
+      filter: brightness(0) invert(1);
+    }
     body.svc-filipinos header.site nav a,
     body.svc-filipinos header.site .dropbtn {
       color: #c8d8f8;
@@ -373,6 +377,33 @@
     body.svc-filipinos footer.site a:hover { color: var(--ph-gold); }
     body.svc-filipinos footer.site .bottom { border-top-color: rgba(0,56,168,0.2); }
 
+    /* ── Month groups ── */
+    .month-group { margin-top: 52px; }
+    .month-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .month-label span {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ph-gold);
+      background: rgba(252,209,22,0.1);
+      border: 1px solid rgba(252,209,22,0.25);
+      padding: 5px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .month-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(0,56,168,0.3);
+    }
+
     /* ── Responsive ── */
     @media (max-width:640px) {
       .expertise-grid,
@@ -407,9 +438,9 @@
           <a href="media.html" role="menuitem"><span class="dot"></span> Media &amp; Sponsorship</a>
           <a href="celebrities.html" role="menuitem"><span class="dot"></span> Celebrities &amp; Influencers</a>
           <a href="creative.html" role="menuitem"><span class="dot"></span> Creative &amp; Development</a>
+          <a href="filipinos.html" role="menuitem" aria-current="page" style="color:#FCD116;border-top:1px solid rgba(252,209,22,0.15);margin-top:6px;padding-top:10px"><span class="dot" style="background:#0038A8;margin-right:2px"></span> 🇵🇭 Filipino Market</a>
         </div>
       </div>
-      <a href="filipinos.html" class="nav-ph-badge" aria-current="page">🇵🇭 Filipino Market</a>
       <a href="contact.html" class="cta">Contact</a>
     </nav>
     <button id="burger" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
@@ -578,89 +609,160 @@
   <script src="scripts.js" defer></script>
 
   <script>
-    /* ── Google Sheets Events Calendar ──────────────────────────────────── */
+    /* ── Google Sheets Events Calendar — by month ───────────────────────── */
     (function () {
       const SHEET_ID = '1s8_4DZh_Ph7hFPzVvkq5QtLDWmWaoTcliINP7QmkNsU';
-      const GID      = '0';
-      const URL      = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + GID;
+      // gviz endpoint handles CORS better than the export URL
+      const GVIZ_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=0';
+      const EXPORT_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=0';
 
-      /* Robust CSV parser — handles quoted fields with commas inside */
+      const MONTHS = ['January','February','March','April','May','June',
+                      'July','August','September','October','November','December'];
+
+      /* ── CSV parser ── */
       function parseLine(line) {
-        const cols = [];
-        let cur = '', inQ = false;
+        const cols = []; let cur = '', inQ = false;
         for (let i = 0; i < line.length; i++) {
           const c = line[i];
-          if (c === '"') {
-            if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
-            else { inQ = !inQ; }
-          } else if (c === ',' && !inQ) {
-            cols.push(cur.trim()); cur = '';
-          } else { cur += c; }
+          if (c === '"') { if (inQ && line[i+1]==='"'){cur+='"';i++;}else{inQ=!inQ;} }
+          else if (c===',' && !inQ){ cols.push(cur.trim()); cur=''; }
+          else { cur += c; }
         }
-        cols.push(cur.trim());
-        return cols;
+        cols.push(cur.trim()); return cols;
       }
 
       function parseCSV(text) {
         const lines = text.trim().split(/\r?\n/);
-        if (lines.length < 2) return { headers: [], rows: [] };
-        const headers = parseLine(lines[0]).map(h => h.replace(/^"|"$/g, ''));
+        if (lines.length < 2) return [];
+        const headers = parseLine(lines[0]).map(h => h.replace(/^"|"$/g,'').trim());
         const rows = [];
         for (let i = 1; i < lines.length; i++) {
           if (!lines[i].trim()) continue;
-          const vals = parseLine(lines[i]).map(v => v.replace(/^"|"$/g, ''));
+          const vals = parseLine(lines[i]).map(v => v.replace(/^"|"$/g,'').trim());
           const row = {};
-          headers.forEach((h, idx) => { row[h] = vals[idx] || ''; });
+          headers.forEach((h,idx) => { row[h] = vals[idx]||''; });
           rows.push(row);
         }
-        return { headers, rows };
+        return rows;
       }
 
-      /* Find a field value by trying multiple candidate keys */
+      /* ── Field picker — case/whitespace insensitive ── */
       function pick(row, candidates) {
         for (const c of candidates) {
-          const key = Object.keys(row).find(k => k.toLowerCase().replace(/\s/g,'').includes(c));
-          if (key && row[key]) return row[key];
+          const key = Object.keys(row).find(k => k.toLowerCase().replace(/[\s_-]/g,'').includes(c.toLowerCase()));
+          if (key && row[key] && row[key].trim()) return row[key].trim();
         }
         return '';
       }
 
-      function renderEvents(rows) {
-        const validRows = rows.filter(r => pick(r, ['event','name','title','evento']));
-        if (!validRows.length) {
-          return '<div class="events-state"><strong>No upcoming events</strong><p>New events are added regularly — check back soon.</p></div>';
-        }
-        return '<div class="events-grid">' + validRows.map(row => {
-          const name     = pick(row, ['event','name','title','evento','nome']);
-          const date     = pick(row, ['date','fecha','data']);
-          const time     = pick(row, ['time','hora']);
-          const location = pick(row, ['location','venue','place','lugar','local']);
-          const desc     = pick(row, ['description','details','info','desc','notes']);
-          const link     = pick(row, ['link','url','register','ticket','website']);
-          const dateStr  = date ? (time ? date + ' · ' + time : date) : '';
-          return [
-            '<div class="event-card">',
-            dateStr ? '<span class="event-date-badge">📅 ' + dateStr + '</span>' : '',
-            '<div class="event-name">' + name + '</div>',
-            location ? '<div class="event-location">📍 ' + location + '</div>' : '',
-            desc ? '<p class="event-desc">' + desc + '</p>' : '',
-            link ? '<a href="' + link + '" class="event-link" target="_blank" rel="noopener">More info →</a>' : '',
-            '</div>'
-          ].join('');
-        }).join('') + '</div>';
+      /* ── Parse a date string into a JS Date ── */
+      function parseDate(str) {
+        if (!str) return null;
+        // Try native parse first
+        let d = new Date(str);
+        if (!isNaN(d)) return d;
+        // Try DD/MM/YYYY
+        const dmy = str.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+        if (dmy) return new Date(+dmy[3]<100?2000+ +dmy[3]: +dmy[3], +dmy[2]-1, +dmy[1]);
+        return null;
       }
 
-      async function loadEvents() {
-        try {
-          const res = await fetch(URL);
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          const text = await res.text();
-          const { rows } = parseCSV(text);
-          document.getElementById('events-container').innerHTML = renderEvents(rows);
-        } catch (e) {
-          document.getElementById('events-container').innerHTML =
-            '<div class="events-state"><strong>Events coming soon</strong><p>Could not load events right now. <a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the latest schedule.</p></div>';
+      /* ── Group events by month ── */
+      function groupByMonth(rows) {
+        const groups = {}; // key: "YYYY-MM" → { label, events[] }
+        const ungrouped = [];
+
+        rows.forEach(row => {
+          const name = pick(row, ['event','name','title','evento','nome','activity']);
+          if (!name) return;
+
+          const dateStr = pick(row, ['date','fecha','data','when','dia']);
+          const d = parseDate(dateStr);
+
+          if (d) {
+            const key = d.getFullYear() + '-' + String(d.getMonth()).padStart(2,'0');
+            const label = MONTHS[d.getMonth()] + ' ' + d.getFullYear();
+            if (!groups[key]) groups[key] = { label, sortKey: key, events: [] };
+            groups[key].events.push({ row, date: d, name });
+          } else {
+            ungrouped.push({ row, date: null, name, dateStr });
+          }
+        });
+
+        // Sort events within each month by day
+        Object.values(groups).forEach(g => g.events.sort((a,b) => a.date - b.date));
+
+        // Sort months chronologically
+        const sorted = Object.values(groups).sort((a,b) => a.sortKey.localeCompare(b.sortKey));
+
+        if (ungrouped.length) {
+          sorted.push({ label: 'Date TBC', sortKey: 'z', events: ungrouped.map(e => ({...e})) });
         }
+        return sorted;
+      }
+
+      /* ── Render a single event card ── */
+      function renderCard(row, dateObj) {
+        const name     = pick(row, ['event','name','title','evento','nome','activity']);
+        const time     = pick(row, ['time','hora','heure','start']);
+        const location = pick(row, ['location','venue','place','lugar','local','where']);
+        const desc     = pick(row, ['description','details','info','desc','notes','about']);
+        const link     = pick(row, ['link','url','register','ticket','website','rsvp']);
+
+        const dayStr = dateObj
+          ? dateObj.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})
+          : '';
+
+        return [
+          '<div class="event-card">',
+          dayStr ? '<span class="event-date-badge">📅 ' + dayStr + (time ? ' · '+time : '') + '</span>' : '',
+          '<div class="event-name">' + name + '</div>',
+          location ? '<div class="event-location">📍 ' + location + '</div>' : '',
+          desc ? '<p class="event-desc">' + desc + '</p>' : '',
+          link ? '<a href="' + link + '" class="event-link" target="_blank" rel="noopener">More info →</a>' : '',
+          '</div>'
+        ].join('');
+      }
+
+      /* ── Render all groups ── */
+      function renderGroups(groups) {
+        if (!groups.length) {
+          return '<div class="events-state"><strong>No events found</strong><p>Joy hasn\'t added events yet — check back soon.</p></div>';
+        }
+        return groups.map(g => `
+          <div class="month-group">
+            <div class="month-label"><span>${g.label}</span></div>
+            <div class="events-grid">
+              ${g.events.map(e => renderCard(e.row, e.date)).join('')}
+            </div>
+          </div>`).join('');
+      }
+
+      /* ── Fetch with fallback ── */
+      async function loadEvents() {
+        let text = null;
+        // Try gviz endpoint first (better CORS support)
+        try {
+          const r1 = await fetch(GVIZ_URL);
+          if (r1.ok) text = await r1.text();
+        } catch(_) {}
+        // Fallback to export URL
+        if (!text) {
+          try {
+            const r2 = await fetch(EXPORT_URL);
+            if (r2.ok) text = await r2.text();
+          } catch(_) {}
+        }
+
+        if (!text) {
+          document.getElementById('events-container').innerHTML =
+            '<div class="events-state"><strong>Events coming soon</strong><p>Could not load the calendar right now. <a href="contact.html" style="color:var(--ph-gold)">Contact us</a> for the latest schedule.</p></div>';
+          return;
+        }
+
+        const rows = parseCSV(text);
+        const groups = groupByMonth(rows);
+        document.getElementById('events-container').innerHTML = renderGroups(groups);
       }
 
       loadEvents();
