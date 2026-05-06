@@ -377,6 +377,29 @@
     body.svc-filipinos footer.site a:hover { color: var(--ph-gold); }
     body.svc-filipinos footer.site .bottom { border-top-color: rgba(0,56,168,0.2); }
 
+    /* ── Legend strip ── */
+    .legend-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      margin-top: 28px;
+      margin-bottom: 8px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: rgba(200,216,248,0.75);
+      font-weight: 500;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
     /* ── Month groups ── */
     .month-group { margin-top: 52px; }
     .month-label {
@@ -547,6 +570,15 @@
         <span class="ph-eyebrow">Community Calendar</span>
         <h2 class="ph-h2">Filipino Events in the UAE.</h2>
         <p class="ph-p" style="margin-bottom:0">Upcoming Filipino community events, festivals and activations. Updated live — no refresh needed.</p>
+
+        <div class="legend-strip">
+          <span class="legend-item"><span class="legend-dot" style="background:#22C55E"></span>PEBA Sports</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#A3E635"></span>Zumba Community</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#F472B6"></span>Filipino Moms Club</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#F87171"></span>FilHR</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#22D3EE"></span>ABS-CBN / TFC</span>
+        </div>
+
         <div id="events-container">
           <div class="events-state" id="events-loading">
             <div class="spinner"></div>
@@ -687,16 +719,40 @@
           .filter(g => g.events.length > 0);
       }
 
+      /* ── Organisation colour map (matches the spreadsheet legend) ── */
+      const ORG_COLORS = [
+        { keywords: ['peba','aba season','aba league','women\'s league','feu sports'],
+          color: '#22C55E', label: 'PEBA Sports' },
+        { keywords: ['zumba','dance your heart','tropical heat zumba'],
+          color: '#A3E635', label: 'Zumba Community' },
+        { keywords: ['moms club','ayuda','giving back','sahara kids','nfps','feps','richmindale','halloween','filipinay fiesta'],
+          color: '#F472B6', label: 'Filipino Moms Club' },
+        { keywords: ['filhr','16th year'],
+          color: '#F87171', label: 'FilHR' },
+        { keywords: ['abs-cbn','tfc','filipino channel','kalayaan','barrio fiesta','al naboodah','power & glow',
+                     'summer sweat','confidence in motion','breast cancer','seminar strive','back-to-school',
+                     'naboodah','dwtc','christmas','dxb 30x30'],
+          color: '#22D3EE', label: 'ABS-CBN / TFC' },
+      ];
+
+      function getOrgColor(name) {
+        const n = name.toLowerCase();
+        for (const org of ORG_COLORS) {
+          if (org.keywords.some(k => n.includes(k))) return org.color;
+        }
+        return '#6366F1'; // default indigo for unmatched
+      }
+
       /* ── Render one event card ── */
       function renderCard(event) {
         const { name, details } = event;
-        // Look for a date-like line and a location-like line in details
+        const color = getOrgColor(name);
         const dateLine = details.find(l => /\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d{4}/i.test(l));
         const otherDetails = details.filter(l => l !== dateLine);
 
-        return `<div class="event-card">
-          ${dateLine ? `<span class="event-date-badge">📅 ${dateLine}</span>` : ''}
-          <div class="event-name">${name}</div>
+        return `<div class="event-card" style="border-left-color:${color}">
+          ${dateLine ? `<span class="event-date-badge" style="background:${color}20;color:${color};border:1px solid ${color}40">📅 ${dateLine}</span>` : ''}
+          <div class="event-name" style="color:#fff">${name}</div>
           ${otherDetails.map(d => `<p class="event-desc">${d}</p>`).join('')}
         </div>`;
       }
