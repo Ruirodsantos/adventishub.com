@@ -237,9 +237,15 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
     .expertise-card .card-icon {
-      font-size: 38px;
-      margin-bottom: 20px;
       display: block;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 22px;
+      color: var(--ph-gold);
+    }
+    .expertise-card .card-icon svg {
+      width: 100%;
+      height: 100%;
     }
     .expertise-card h3 {
       font-size: 20px;
@@ -602,17 +608,37 @@
         <p class="ph-p">With over a million Filipinos living and working across the GCC, this is one of the most engaged and brand-loyal communities in the region. We know how to reach them and how to make campaigns resonate.</p>
         <div class="expertise-grid">
           <div class="expertise-card reveal">
-            <span class="card-icon">🧠</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+                <path d="M17 3l1.5 1.5M19 6h2M17 9l1.5-1.5"/>
+              </svg>
+            </span>
             <h3>Cultural Insight</h3>
             <p>Understanding behavior, values, and decision drivers within the Filipino community. We know what matters: OFW remittance priorities, entertainment preferences and the trust signals that move people to act.</p>
           </div>
           <div class="expertise-card reveal">
-            <span class="card-icon">👥</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="7" r="3"/>
+                <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+                <circle cx="17" cy="7" r="3"/>
+                <path d="M21 20c0-3.3-2.7-6-6-6"/>
+              </svg>
+            </span>
             <h3>Community Activations</h3>
             <p>TFC and other Filipino events, sponsorships and on-ground presence to drive real engagement. We connect brands to the places and moments where the Filipino community gathers, celebrates and makes decisions.</p>
           </div>
           <div class="expertise-card reveal">
-            <span class="card-icon">🎯</span>
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="5"/>
+                <circle cx="12" cy="12" r="1" fill="currentColor"/>
+                <path d="M12 3V1M12 23v-2M3 12H1M23 12h-2"/>
+              </svg>
+            </span>
             <h3>Targeted Campaigns</h3>
             <p>Culturally adapted messaging, precise audience targeting, and platform optimisation across Facebook, TikTok, Filipino media channels and more. Every dirham placed with purpose and tracked to outcome.</p>
           </div>
@@ -625,8 +651,8 @@
       <div class="container">
         <div class="stats-grid">
           <div class="stat-item reveal">
-            <div class="stat-number">1M+</div>
-            <div class="stat-label">Filipinos across the GCC and the UAE alone is the largest expat community</div>
+            <div class="stat-number">3M+</div>
+            <div class="stat-label">Filipinos across the GCC, including over 1 million in the UAE alone</div>
           </div>
           <div class="stat-item reveal">
             <div class="stat-number">7+</div>
@@ -648,7 +674,7 @@
     <section class="ph-section-events">
       <div class="container">
         <span class="ph-eyebrow">Community Calendar</span>
-        <h2 class="ph-h2">Filipino Events Across the GCC.</h2>
+        <h2 class="ph-h2">Filipino Events in the UAE.</h2>
         <p class="ph-p" style="margin-bottom:0">Upcoming Filipino community events, festivals and activations. Updated live. No refresh needed.</p>
 
         <div class="legend-strip">
