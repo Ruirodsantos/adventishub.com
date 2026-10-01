@@ -21,33 +21,86 @@
   <link rel="stylesheet" href="styles.css" />
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Adventis",
-    "legalName": "Adventis L.L.C.-FZ",
-    "alternateName": ["Adventis Hub", "adventishub"],
-    "url": "https://adventishub.com",
-    "logo": "https://adventishub.com/images/Website_Adventis_Logo.png",
-    "description": "Adventis, legally registered as Adventis L.L.C.-FZ, is a Dubai-based marketing, analytics, and performance consultancy with global reach. The company combines digital marketing, performance-driven marketing, artists, celebrities and influencer collaborations, and offline event sponsorship marketing to help brands grow with measurable impact.",
-    "founder": [
-      { "@type": "Person", "name": "Rui Rodrigues dos Santos" },
-      { "@type": "Person", "name": "Joy Santos" }
-    ],
-    "areaServed": [
-      { "@type": "Country", "name": "United Arab Emirates" },
-      { "@type": "Place", "name": "Middle East" },
-      { "@type": "Country", "name": "Philippines" },
-      { "@type": "Country", "name": "United States" },
-      { "@type": "Country", "name": "United Kingdom" }
-    ],
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "contactType": "sales",
-      "email": "joy@adventishub.com",
-      "availableLanguage": ["en"]
-    }]
-  }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "ProfessionalService"
+      ],
+      "@id": "https://adventishub.com/#organization",
+      "name": "Adventis",
+      "legalName": "Adventis L.L.C.-FZ",
+      "url": "https://adventishub.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://adventishub.com/images/Website_Adventis_Logo.png"
+      },
+      "description": "Adventis is a Dubai-based performance marketing agency providing paid media, programmatic advertising, influencer and celebrity marketing, sponsorships, analytics, AI-powered marketing solutions and specialist Filipino market expertise.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+      },
+      "founder": [
+        {
+          "@type": "Person",
+          "name": "Rui Rodrigues dos Santos",
+          "jobTitle": "Co-founder"
+        },
+        {
+          "@type": "Person",
+          "name": "Joy Santos",
+          "jobTitle": "Co-founder"
+        }
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Filipino Market & Diaspora Marketing",
+            "url": "https://adventishub.com/filipinos.html"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://adventishub.com/about.html#webpage",
+      "url": "https://adventishub.com/about.html",
+      "name": "About Adventis",
+      "isPartOf": {
+        "@id": "https://adventishub.com/#website"
+      },
+      "about": {
+        "@id": "https://adventishub.com/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://adventishub.com/about.html#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://adventishub.com/about.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://adventishub.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "About",
+          "item": "https://adventishub.com/about.html"
+        }
+      ]
+    }
+  ]
+}
   </script>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6XZWPZP2N5"></script>
@@ -78,6 +131,7 @@
           <a href="creative.html"><span class="dot"></span> Creative &amp; Development</a>
         </div>
       </div>
+      <a href="filipinos.html">Filipino Market</a>
       <a href="contact.html" class="cta">Contact</a>
     </nav>
     <button id="burger" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span></button>
@@ -93,8 +147,8 @@
       <a href="media.html">Media &amp; Sponsorship</a>
       <a href="celebrities.html">Celebrities &amp; Influencers</a>
       <a href="creative.html">Creative &amp; Development</a>
-      <a href="filipinos.html" style="color:#FCD116">🇵🇭 Filipino Market</a>
     </details>
+    <a href="filipinos.html">Filipino Market</a>
     <a href="contact.html">Contact Us</a>
   </aside>
 
@@ -114,7 +168,8 @@
           <h2 style="margin-top:0">Adventis at a glance</h2>
           <p>Adventis, legally registered as Adventis L.L.C.-FZ, is a Dubai-based marketing, analytics and performance consultancy with global reach.</p>
           <p>We combine digital marketing, performance-driven media, artists, celebrities and influencer collaborations, and event sponsorship to help brands grow with measurable impact.</p>
-          <p>We bring advanced experience supporting remittance and financial services clients and engage diverse audiences across the UAE and international markets through digital, broadcast (TV and radio), and live experiences, including strong knowledge of the Filipino market.</p>
+          <p>Filipino market expertise is one of our specialist propositions. We help brands reach Filipino audiences in the UAE, across the GCC, in the Philippines and in diaspora markets, with experience that includes remittance and financial services brands. Our Filipino audience strategies are not limited to Dubai. <a href="filipinos.html">Read about our Filipino market expertise</a>.</p>
+          <p>More broadly, we engage diverse audiences across the UAE and international markets through digital, broadcast (TV and radio) and live experiences.</p>
         </div>
       </div>
     </section>
@@ -169,7 +224,7 @@
                   <li><strong>Digital advertising.</strong> Search, social, programmatic and video campaigns with ongoing optimisation.</li>
                   <li><strong>Broadcast media (TV and radio).</strong> Planning and execution to complement digital and maximise reach.</li>
                   <li><strong>Creative and development.</strong> Stories, visuals and landing experiences built to convert.</li>
-                  <li><strong>Market expertise.</strong> Engaging multicultural audiences, including the Filipino market.</li>
+                  <li><strong>Market expertise.</strong> Engaging multicultural audiences, with specialist <a href="filipinos.html">Filipino market and diaspora expertise</a>.</li>
                 </ul>
               </div>
             </div>
@@ -220,7 +275,7 @@
           <a href="media.html">Media &amp; Sponsorship</a>
           <a href="celebrities.html">Celebrities &amp; Influencers</a>
           <a href="creative.html">Creative &amp; Development</a>
-      <a href="filipinos.html" style="color:#FCD116">🇵🇭 Filipino Market</a>
+      <a href="filipinos.html">Filipino Market</a>
         </div>
         <div>
           <h5>Company</h5>

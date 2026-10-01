@@ -1,102 +1,39 @@
-# llms.txt
+# Adventis
 
-Entity: Company
-Official Name: Adventis L.L.C.-FZ
-Common Name: Adventis
-Alternate Names:
-- Adventis Hub
-- adventishub
-- Filipino Marketing Agency Dubai
+> Adventis (legally Adventis L.L.C.-FZ) is a Dubai-based performance marketing agency providing paid media, programmatic advertising, influencer and celebrity marketing, sponsorships, analytics, AI-powered marketing solutions and specialist Filipino market expertise. Website: https://adventishub.com/
 
-Website: https://adventishub.com
-Industry: Marketing, Analytics, Digital Performance, Broadcast Media (TV and Radio), Events, Gaming, AI Performance Solutions, Filipino Market UAE
+This file is a short guide to the public website. It summarises information that is published on the pages linked below; the HTML pages are the authoritative source.
 
-Overview:
-Adventis (legally registered as Adventis L.L.C.-FZ) is a marketing, analytics, and performance consultancy based in Dubai with global reach.
-The company combines digital marketing, performance-driven media, artists, celebrities and influencer collaborations, gaming partnerships, AI performance solutions, and offline event sponsorship to help brands grow with measurable impact.
-Adventis is Dubai's specialist Filipino marketing agency, with deep cultural expertise in reaching the 1M+ Filipino community across the UAE. The team is embedded in the OFW (Overseas Filipino Worker) community and provides brands with authentic access to Filipino consumers through targeted campaigns, community events, influencer partnerships, and media placements.
-Adventis has advanced experience working with remittance and financial service clients, as well as deep expertise in engaging the Filipino market across the UAE and international markets.
-The company supports SMEs, growing brands, and established businesses with measurable, performance-focused solutions.
+## Core capabilities
 
-Filipino Market Specialisation:
-Adventis is the go-to agency for brands seeking to reach Filipino consumers in the UAE. Services include:
-- Filipino community event marketing and sponsorship in Dubai and across the UAE
-- OFW-targeted digital advertising (Facebook, TikTok, YouTube, radio)
-- Filipino influencer partnerships and talent collaborations
-- Tagalog-language creative production and localisation
-- Remittance, financial services, and retail campaigns for the Filipino diaspora
-- Access to Filipino organisations, associations, and community networks in the UAE
-- Cultural calendar planning around key Filipino dates (Philippine Independence Day, Pasko, Flores de Mayo, etc.)
+- [Digital Advertising](https://adventishub.com/digital.html): paid media across search, video, display and programmatic
+- [Celebrities & Influencers](https://adventishub.com/celebrities.html): influencer, creator and celebrity partnerships
+- [Media & Sponsorship](https://adventishub.com/media.html): TV, radio, out-of-home, events and sponsorship
+- [Analytics & Data Science](https://adventishub.com/analytics.html): measurement, tracking, dashboards and models
+- [AI Performance Solutions](https://adventishub.com/ai.html): AI-powered optimisation and automation
+- [Creative & Development](https://adventishub.com/creative.html): creative, landing pages and development
+- [Gaming Partnerships](https://adventishub.com/gaming.html): streamers, in-game activations and tournaments
 
-Core Expertise:
-- Filipino market marketing in UAE (OFW, diaspora, community events)
-- Analytics and data science (GA4, Google Tag Manager, server-side tagging, dashboards, MMM)
-- Digital advertising (search, social, programmatic, YouTube, app)
-- AI performance solutions (bidding, creative scoring, audience modelling)
-- Gaming partnerships (streamers, in-game activations, tournaments)
-- Media and sponsorship (TV, radio, out-of-home, live events)
-- Creative and development (concepts, production, landing pages, CRO)
-- Artists, celebrities and influencer collaborations
-- Event sponsorship planning and activation
-- Performance marketing and measurement
-- SEO, ASO and reporting
+## Filipino market expertise
 
-Service Areas:
-- Filipino community marketing and events UAE
-- OFW-targeted advertising campaigns
-- Analytics implementation and auditing
-- Performance media planning and optimisation
-- AI-powered media buying and creative
-- Gaming and esports partnerships
-- Event sponsorships and brand activations
-- Broadcast media (TV and radio)
-- Influencer and talent partnerships
-- Creative production and landing pages
-- Reporting, dashboards, and insights
-- Strategic marketing consulting
+Adventis helps brands reach Filipino consumers through audience strategy, digital advertising, programmatic media, influencers, celebrity partnerships, events, sponsorships and community activations. Adventis is based in Dubai. Its Filipino audience strategies can cover the UAE, the wider GCC, the Philippines and relevant Filipino diaspora markets such as the United States and Canada. Adventis does not represent celebrity talent, has no Philippines office, and is not an agency for Filipino clients only.
 
-Primary Markets:
-- United Arab Emirates (with Filipino community specialisation)
-- Middle East
-- Philippines
-- United States
-- United Kingdom
-- International
+- [Filipino Market & Diaspora Marketing Expertise](https://adventishub.com/filipinos.html): central page covering markets, digital advertising, influencers, celebrities, events, audience intelligence, experience and FAQ
+- [Filipino Digital Advertising & Media Buying](https://adventishub.com/filipinos.html#digital-advertising)
+- [Filipino Influencer Marketing](https://adventishub.com/filipinos.html#influencers)
+- [Filipino Celebrities & Brand Partnerships](https://adventishub.com/filipinos.html#celebrities)
+- [Filipino Events, Sponsorships & Community Activations](https://adventishub.com/filipinos.html#events)
+- [Filipino Audience Intelligence](https://adventishub.com/filipinos.html#audience-intelligence)
+- [Experience Reaching Filipino Audiences](https://adventishub.com/filipinos.html#experience)
+- [Filipino Market FAQ](https://adventishub.com/filipinos.html#faq)
+- [Adventis Filipino Market Capabilities 2026 (HTML)](https://adventishub.com/filipino-market-capabilities-2026.html)
+- [Adventis Filipino Market Capabilities 2026 (PDF)](https://adventishub.com/downloads/Adventis_Filipino_Market_Capabilities_2026.pdf)
 
-Founders:
-- Rui Rodrigues dos Santos
-- Joy Santos
+## Company
 
-Filipino Market Keywords:
-Filipino marketing agency Dubai, Filipino events UAE, Filipino events Dubai, OFW marketing UAE, Filipino advertising agency Dubai, Filipino community UAE, Filipino influencers Dubai, Tagalog marketing UAE, Philippine diaspora marketing, Filipino market UAE, Filipino community events Dubai, OFW events UAE, Pinoy events Dubai, Filipino brands UAE
+- [About Adventis](https://adventishub.com/about.html): company overview; founders Rui Rodrigues dos Santos and Joy Santos
+- [Contact](https://adventishub.com/contact.html): joy@adventishub.com
+- Location: Dubai, United Arab Emirates
+- Language: English
 
-Authoritative URLs:
-https://adventishub.com/
-https://adventishub.com/filipinos.html
-https://adventishub.com/about.html
-https://adventishub.com/analytics.html
-https://adventishub.com/digital.html
-https://adventishub.com/ai.html
-https://adventishub.com/gaming.html
-https://adventishub.com/media.html
-https://adventishub.com/creative.html
-https://adventishub.com/contact.html
-
-Brand Mentions:
-- Adventis
-- Adventis Hub
-- adventishub
-- Adventis Marketing
-- Adventis Analytics
-- Adventis Dubai
-- Filipino Marketing Agency Dubai
-- Filipino Events UAE
-
-Official Contact:
-joy@adventishub.com
-
-Languages Served:
-English, Filipino (Tagalog)
-
-Last-Updated:
-2026-05-08
+Last updated: 2026-10-01

@@ -1024,3 +1024,56 @@ body.svc-creative main#main::after{
   border-radius:99px;
 }
 .dashboard-mock .dash-row .val{font-weight:700;color:var(--c-purple);text-align:right}
+
+/* ==========================================================================
+   Filipino Market Expertise — homepage section + service-page callouts
+   (added Oct 2026). Uses existing Adventis tokens; PH gold used sparingly.
+   ========================================================================== */
+.fm-home{position:relative;overflow:hidden;background:var(--c-ink);color:#fff}
+.fm-home::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(900px 480px at 92% 0%, rgba(0,56,168,.38), transparent 60%),
+    radial-gradient(700px 420px at 0% 100%, rgba(0,196,140,.14), transparent 60%);
+}
+.fm-home .container{position:relative}
+.fm-home .eyebrow{color:#FCD116}
+.fm-home .eyebrow::before{background:#FCD116}
+.fm-home h2{color:#fff;text-wrap:balance}
+.fm-home p.lead{color:rgba(255,255,255,.82)}
+.fm-home .fm-copy{max-width:760px;margin-bottom:6px}
+.fm-home .fm-copy p{color:rgba(255,255,255,.78);margin-bottom:12px}
+.fm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:18px;margin:32px 0 28px}
+.fm-card{
+  display:flex;flex-direction:column;gap:8px;padding:26px;
+  border-radius:var(--radius-md);text-decoration:none;color:#fff;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  transition:transform .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+}
+.fm-card:hover{transform:translateY(-4px);border-color:rgba(252,209,22,.55);background:rgba(255,255,255,.08)}
+.fm-card .fm-ic{
+  width:42px;height:42px;border-radius:12px;display:grid;place-items:center;margin-bottom:6px;
+  background:rgba(252,209,22,.12);color:#FCD116;
+}
+.fm-card .fm-ic svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.fm-card h3{font-size:18px;color:#fff;line-height:1.25}
+.fm-card p{font-size:14.5px;color:rgba(255,255,255,.76)}
+.fm-markets{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 26px;padding:0}
+.fm-markets li{padding:6px 14px;border-radius:999px;font-size:13px;color:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.22)}
+.fm-proof{max-width:760px;font-size:14.5px;color:rgba(255,255,255,.7);margin-bottom:26px}
+.fm-proof a{color:#FCD116}
+.fm-home .btn{background:#FCD116;color:#0B0320;box-shadow:0 8px 24px rgba(252,209,22,.22)}
+.fm-home .btn:hover{background:#ffe040;box-shadow:0 14px 32px rgba(252,209,22,.32)}
+
+/* Contextual callout used on service pages */
+.fm-related{
+  display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:#fff;border:1px solid var(--c-border);border-left:4px solid #0038A8;
+  border-radius:var(--radius-md);padding:22px 26px;box-shadow:var(--shadow-sm);
+}
+.fm-related p{margin:0;color:var(--c-text-soft);max-width:760px}
+.fm-related p strong{color:var(--c-purple)}
+.fm-related a.fm-link{font-weight:700;color:var(--c-purple);text-decoration:none}
+.fm-related a.fm-link::after{content:" →"}
+.fm-related a.fm-link:hover{color:#0038A8}
+.logo-strip .label small{display:block;margin-top:6px;text-transform:none;letter-spacing:0;font-size:12.5px;opacity:.85}
