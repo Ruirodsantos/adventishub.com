@@ -53,4 +53,4 @@ Then open [http://localhost:8000](http://localhost:8000).
 
 ## Contact
 
-joy@adventishub.com
+Use the contact form at https://adventishub.com/contact.html

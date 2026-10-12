@@ -31,8 +31,8 @@ Adventis helps brands reach Filipino consumers through audience strategy, digita
 
 ## Company
 
-- [About Adventis](https://adventishub.com/about.html): company overview; founders Rui Rodrigues dos Santos and Joy Santos
-- [Contact](https://adventishub.com/contact.html): joy@adventishub.com
+- [About Adventis](https://adventishub.com/about.html): company overview
+- [Contact](https://adventishub.com/contact.html): secure contact form
 - Location: Dubai, United Arab Emirates
 - Language: English
 

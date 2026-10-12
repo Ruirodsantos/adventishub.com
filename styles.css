@@ -1077,3 +1077,34 @@ body.svc-creative main#main::after{
 .fm-related a.fm-link::after{content:" →"}
 .fm-related a.fm-link:hover{color:#0038A8}
 .logo-strip .label small{display:block;margin-top:6px;text-transform:none;letter-spacing:0;font-size:12.5px;opacity:.85}
+
+/* ── Contact form ───────────────────────────────────────── */
+.contact-form{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+.contact-form .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.contact-form .cf-field{display:flex;flex-direction:column;gap:6px}
+.contact-form label{font-size:14px;font-weight:500;color:var(--c-text)}
+.contact-form label span{color:var(--c-green)}
+.contact-form input,.contact-form select,.contact-form textarea{
+  font:inherit;font-size:15.5px;color:var(--c-text);background:#fff;
+  border:1.5px solid var(--c-muted);border-radius:12px;padding:12px 14px;width:100%;
+  transition:border-color .2s,box-shadow .2s;
+}
+.contact-form textarea{resize:vertical;min-height:140px;line-height:1.5}
+.contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{
+  outline:none;border-color:var(--c-purple);box-shadow:0 0 0 3px rgba(42,7,83,.12)
+}
+.contact-form .has-error input,.contact-form .has-error textarea{border-color:#D93A4A}
+.contact-form .cf-hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+.contact-form .cf-submit{align-self:flex-start;border:none;cursor:pointer}
+.contact-form .cf-submit:disabled{opacity:.6;cursor:progress;transform:none}
+.contact-form .cf-status{min-height:1.4em;margin:0;font-size:14.5px}
+.contact-form .cf-status.is-success{color:#007a57;font-weight:600}
+.contact-form .cf-status.is-error{color:#D93A4A;font-weight:500}
+.contact-form .cf-status.is-pending{color:var(--c-purple)}
+.contact-form .cf-legal{font-size:12.5px;opacity:.7;margin:0}
+.contact-form .cf-legal a{color:inherit;text-decoration:underline}
+.grecaptcha-badge{visibility:hidden}
+@media (max-width:640px){
+  .contact-form .cf-grid{grid-template-columns:1fr}
+  .contact-form .cf-submit{align-self:stretch;justify-content:center}
+}

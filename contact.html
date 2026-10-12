@@ -30,7 +30,7 @@
     "mainEntity": {
       "@type": "Organization",
       "name": "Adventis",
-      "email": "joy@adventishub.com",
+      "url": "https://adventishub.com/contact.html",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Dubai",
@@ -102,21 +102,58 @@
           <div class="feature-body">
             <span class="eyebrow">Get in touch</span>
             <h2>A short intro is enough.</h2>
-            <p class="lead">Include a few details about your company and objectives in your email so we can prepare before replying. We'll come back with a point of view, not a pitch deck.</p>
-            <p style="margin-top:18px"><a class="btn" href="mailto:joy@adventishub.com?subject=Adventis%20%E2%80%94%20project%20enquiry">Send us an email <span class="arrow">→</span></a></p>
-            <p style="margin-top:14px;font-size:14.5px">Planning a campaign for Filipino audiences? Use the <a href="filipinos.html#plan-a-campaign" style="color:var(--c-purple);font-weight:600">Filipino campaign brief</a> to tell us the market, objective, audience, budget, timing and services you need.</p>
+            <p class="lead">Tell us a little about your company and objectives so we can prepare before replying. We'll come back with a point of view, not a pitch deck.</p>
+
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="cf-grid">
+                <div class="cf-field">
+                  <label for="cf-name">Name <span aria-hidden="true">*</span></label>
+                  <input id="cf-name" name="name" type="text" autocomplete="name" maxlength="100" required />
+                </div>
+                <div class="cf-field">
+                  <label for="cf-email">Work email <span aria-hidden="true">*</span></label>
+                  <input id="cf-email" name="email" type="email" autocomplete="email" maxlength="254" required />
+                </div>
+                <div class="cf-field">
+                  <label for="cf-company">Company</label>
+                  <input id="cf-company" name="company" type="text" autocomplete="organization" maxlength="120" />
+                </div>
+                <div class="cf-field">
+                  <label for="cf-topic">Topic</label>
+                  <select id="cf-topic" name="topic">
+                    <option>General enquiry</option>
+                    <option>Digital advertising</option>
+                    <option>Analytics &amp; data science</option>
+                    <option>AI performance solutions</option>
+                    <option>Media &amp; sponsorship</option>
+                    <option>Celebrities &amp; influencers</option>
+                    <option>Creative &amp; development</option>
+                    <option value="Filipino market campaign">Filipino market campaign</option>
+                    <option>Partnership</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="cf-field">
+                <label for="cf-message">Message <span aria-hidden="true">*</span></label>
+                <textarea id="cf-message" name="message" rows="6" maxlength="4000" required placeholder="Objectives, markets, timing, budget range…"></textarea>
+              </div>
+              <!-- Honeypot: hidden from people, tempting to bots -->
+              <div class="cf-hp" aria-hidden="true">
+                <label for="cf-website">Website</label>
+                <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <button type="submit" class="btn cf-submit">Send message <span class="arrow">→</span></button>
+              <p class="cf-status" role="status" aria-live="polite"></p>
+              <p class="cf-legal">We use your details only to reply to your enquiry. This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Privacy Policy</a> and <a href="https://policies.google.com/terms" rel="noopener" target="_blank">Terms of Service</a> apply.</p>
+            </form>
+
+            <p style="margin-top:18px;font-size:14.5px">Planning a campaign for Filipino audiences? Choose <strong>Filipino market campaign</strong> as the topic, or see the <a href="filipinos.html#plan-a-campaign" style="color:var(--c-purple);font-weight:600">Filipino campaign brief</a> for what to include.</p>
           </div>
 
           <div class="feature-media" style="background:var(--c-ink);color:#fff;border-color:rgba(255,255,255,0.1);padding:36px">
             <h3 style="color:#fff;margin-bottom:18px;font-size:20px">Direct details</h3>
             <div class="contact-info">
-              <div class="item">
-                <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg></span>
-                <div>
-                  <h4>Email</h4>
-                  <a href="mailto:joy@adventishub.com">joy@adventishub.com</a>
-                </div>
-              </div>
               <div class="item">
                 <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0114 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span>
                 <div>
@@ -182,5 +219,6 @@
   </footer>
 
   <script src="scripts.js" defer></script>
+  <script src="contact-form.js" defer></script>
 </body>
 </html>
