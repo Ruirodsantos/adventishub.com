@@ -1277,8 +1277,6 @@
         <h3 class="ph-h3">2026 community calendar highlights</h3>
         <p class="ph-body" style="margin-bottom:6px">From the Adventis community events calendar, last reviewed 1 October 2026. Attendance figures are estimates recorded in the calendar, not audited numbers. Dates marked TBC are not confirmed. The organisations and events listed are part of the Filipino community ecosystem we monitor; listing an event does not mean that the organiser is an Adventis client or partner.</p>
         <ul class="flagship">
-          <li><strong>Dubai Barrio Fiesta 2026</strong>Zabeel Park, 8 February 2026. Estimated 5,000 to 6,000 attendees.</li>
-          <li><strong>Kalayaan 2026</strong>Dubai World Trade Centre, 7 June 2026, Philippine Independence Day celebration. Estimated 10,000 to 20,000 attendees.</li>
           <li><strong>DSF Night Market</strong>October 2026 to May 2027. Estimated 1,000 to 4,000 visitors per day.</li>
           <li><strong>Breast Cancer Awareness event</strong>18 October 2026. Estimated 350 to 400 attendees.</li>
           <li><strong>DXB 30x30 initiative</strong>15 November 2026. Estimated 250 to 300 attendees.</li>
@@ -1303,7 +1301,7 @@
         </div>
 
         <h3 class="ph-h3" style="margin-top:56px">2027 international Filipino events (tentative)</h3>
-        <p class="ph-body" style="margin-bottom:0">Tentative 2027 line-up of ABS-CBN / TFC events for Filipino audiences in North America, Europe &amp; the Middle East and Asia Pacific, as shared by ABS-CBN in October 2026. Dates, cities and line-ups are provisional and will change; we confirm each event with the organiser before building a plan around it. Listing an event does not mean that ABS-CBN is an Adventis client or partner.</p>
+        <p class="ph-body" style="margin-bottom:0">Tentative 2027 line-up of events for Filipino audiences in North America, Europe &amp; the Middle East and Asia Pacific. Dates, cities and line-ups are provisional and will change; we confirm each event with the organiser before building a plan around it.</p>
         <div class="legend-strip">
           <span class="legend-item"><span class="legend-dot" style="background:#3B82F6"></span>North America</span>
           <span class="legend-item"><span class="legend-dot" style="background:#22D3EE"></span>Europe &amp; Middle East</span>
@@ -1533,7 +1531,7 @@
           <li>Philippine Department of Foreign Affairs (DFA), stock estimates of overseas Filipinos in the Middle East, January 2020, as compiled in <a href="https://en.wikipedia.org/wiki/Overseas_Filipinos" rel="noopener">Overseas Filipinos (Wikipedia)</a>.</li>
           <li>DFA report to the Philippine Senate Committee on Foreign Relations, 27 August 2025, covering July to December 2024 (10.8 million overseas Filipinos; Middle East about 2.1 million; United States about 4.4 million; Canada about 974,000), as reported by <a href="https://www.gmanetwork.com/news/pinoyabroad/dispatch/957186/dfa-records-over-10-8-million-overseas-filipinos-in-2024/story/" rel="noopener">GMA News</a>.</li>
           <li>Event dates and attendance estimates: Adventis community events calendar, last reviewed 1 October 2026. Dates can change; confirm with the organiser.</li>
-          <li>2027 international events: ABS-CBN International Events tentative 2027 line-up, shared by ABS-CBN in October 2026. All dates are provisional.</li>
+          <li>2027 international events: tentative 2027 line-up received in October 2026. All dates are provisional.</li>
           <li>Last updated: 1 October 2026.</li>
         </ul>
       </div>
@@ -1709,7 +1707,31 @@
       }
 
       /* ── Render all month sections ── */
+      /* ── Hide events that have already happened ── */
+      const MONTH_ABBR = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+      function explicitDate(event) {
+        const txt = [event.name].concat(event.details).join(' ');
+        const m = txt.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2}),?\s+(20\d{2})\b/i);
+        if (!m) return null;
+        return new Date(Number(m[3]), MONTH_ABBR.indexOf(m[1].toLowerCase()), Number(m[2]));
+      }
+      function removePast(groups, year) {
+        const y = Number(year);
+        if (!y) return groups;
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return groups
+          .filter(g => g.monthIdx === 12 || y > today.getFullYear() ||
+                       (y === today.getFullYear() && g.monthIdx >= today.getMonth()))
+          .map(g => ({ ...g, events: g.events.filter(ev => {
+            const d = explicitDate(ev);
+            return !d || d >= today;
+          }) }))
+          .filter(g => g.events.length > 0);
+      }
+
       function renderAll(groups, year) {
+        groups = removePast(groups, year);
         if (!groups.length) {
           return '<div class="events-state"><strong>No events listed right now</strong><p>See the 2026 highlights above or <a href="#plan-a-campaign" style="color:var(--ph-gold)">ask us about upcoming Filipino events</a>.</p></div>';
         }
@@ -1724,7 +1746,7 @@
 
       /* ── Main: tab gid → container ── */
       const CALENDARS = [
-        { gid: '0',          container: 'events-container',      year: '' },     // UAE community calendar 2026 (Sheet1)
+        { gid: '0',          container: 'events-container',      year: '2026' },     // UAE community calendar 2026 (Sheet1)
         { gid: '1563611524', container: 'events-container-2027', year: '2027' }, // ABS-CBN international events 2027 (tab "2027")
       ];
       const FAIL_HTML = '<div class="events-state"><strong>The live calendar could not be loaded</strong><p>See the 2026 highlights above, or <a href="#plan-a-campaign" style="color:var(--ph-gold)">ask us for the current Filipino events schedule</a>.</p></div>';
