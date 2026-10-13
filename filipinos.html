@@ -1301,6 +1301,20 @@
             <p>Loading events…</p>
           </div>
         </div>
+
+        <h3 class="ph-h3" style="margin-top:56px">2027 international Filipino events (tentative)</h3>
+        <p class="ph-body" style="margin-bottom:0">Tentative 2027 line-up of ABS-CBN / TFC events for Filipino audiences in North America, Europe &amp; the Middle East and Asia Pacific, as shared by ABS-CBN in October 2026. Dates, cities and line-ups are provisional and will change; we confirm each event with the organiser before building a plan around it. Listing an event does not mean that ABS-CBN is an Adventis client or partner.</p>
+        <div class="legend-strip">
+          <span class="legend-item"><span class="legend-dot" style="background:#3B82F6"></span>North America</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#22D3EE"></span>Europe &amp; Middle East</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#F87171"></span>Asia Pacific</span>
+        </div>
+        <div id="events-container-2027">
+          <div class="events-state">
+            <div class="spinner"></div>
+            <p>Loading events…</p>
+          </div>
+        </div>
         <noscript><p class="ph-note">The live calendar needs JavaScript. The 2026 highlights above list the main events, and you can <a href="#plan-a-campaign">ask us for the current schedule</a>.</p></noscript>
       </div>
     </section>
@@ -1519,6 +1533,7 @@
           <li>Philippine Department of Foreign Affairs (DFA), stock estimates of overseas Filipinos in the Middle East, January 2020, as compiled in <a href="https://en.wikipedia.org/wiki/Overseas_Filipinos" rel="noopener">Overseas Filipinos (Wikipedia)</a>.</li>
           <li>DFA report to the Philippine Senate Committee on Foreign Relations, 27 August 2025, covering July to December 2024 (10.8 million overseas Filipinos; Middle East about 2.1 million; United States about 4.4 million; Canada about 974,000), as reported by <a href="https://www.gmanetwork.com/news/pinoyabroad/dispatch/957186/dfa-records-over-10-8-million-overseas-filipinos-in-2024/story/" rel="noopener">GMA News</a>.</li>
           <li>Event dates and attendance estimates: Adventis community events calendar, last reviewed 1 October 2026. Dates can change; confirm with the organiser.</li>
+          <li>2027 international events: ABS-CBN International Events tentative 2027 line-up, shared by ABS-CBN in October 2026. All dates are provisional.</li>
           <li>Last updated: 1 October 2026.</li>
         </ul>
       </div>
@@ -1572,11 +1587,11 @@
                            'July','August','September','October','November','December'];
 
       /* ── JSONP — bypasses CORS ── */
-      function loadViaJsonp() {
+      function loadViaJsonp(gid) {
         return new Promise((resolve, reject) => {
-          const cb = '__gviz_' + Date.now();
+          const cb = '__gviz_' + gid + '_' + Date.now() + '_' + Math.floor(Math.random() * 1e6);
           const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID
-            + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&gid=0';
+            + '/gviz/tq?tqx=out:json;responseHandler:' + cb + '&gid=' + gid;
           window[cb] = function(data) {
             delete window[cb];
             if (s.parentNode) s.parentNode.removeChild(s);
@@ -1610,6 +1625,7 @@
             const v = cell && cell.v != null ? String(cell.v).trim() : '';
             const mi = MONTH_NAMES.findIndex(m => m.toLowerCase() === v.toLowerCase());
             if (mi >= 0) { colToMonthIdx[ci] = mi; hits++; }
+            else if (/^date\s*(tbc|tbd)$/i.test(v)) { colToMonthIdx[ci] = 12; }
           });
           if (hits >= 6) { headerRowIdx = ri; break; }
         }
@@ -1637,7 +1653,7 @@
         }
 
         // Step 3: build sorted month groups
-        return MONTH_NAMES
+        return MONTH_NAMES.concat(['Date to be confirmed'])
           .map((label, mi) => ({ label, monthIdx: mi, events: byMonth[mi] || [] }))
           .filter(g => g.events.length > 0);
       }
@@ -1658,6 +1674,17 @@
           color: '#22D3EE', label: 'ABS-CBN / TFC' },
       ];
 
+      const REGION_COLORS = [
+        { match: 'north america', color: '#3B82F6' },
+        { match: 'europe & middle east', color: '#22D3EE' },
+        { match: 'asia pacific', color: '#F87171' },
+      ];
+      function getEventColor(event) {
+        const d = event.details.join(' ').toLowerCase();
+        const region = REGION_COLORS.find(r => d.includes(r.match));
+        return region ? region.color : getOrgColor(event.name);
+      }
+
       function getOrgColor(name) {
         const n = name.toLowerCase();
         for (const org of ORG_COLORS) {
@@ -1670,7 +1697,7 @@
       function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
       function renderCard(event) {
         const name = esc(event.name); const details = event.details.map(esc);
-        const color = getOrgColor(event.name);
+        const color = getEventColor(event);
         const dateLine = details.find(l => /\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4}|jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|\d{4}/i.test(l));
         const otherDetails = details.filter(l => l !== dateLine);
 
@@ -1682,32 +1709,38 @@
       }
 
       /* ── Render all month sections ── */
-      function renderAll(groups) {
+      function renderAll(groups, year) {
         if (!groups.length) {
           return '<div class="events-state"><strong>No events listed right now</strong><p>See the 2026 highlights above or <a href="#plan-a-campaign" style="color:var(--ph-gold)">ask us about upcoming Filipino events</a>.</p></div>';
         }
         return groups.map(g => `
           <div class="month-group">
-            <div class="month-label"><span>${g.label}</span></div>
+            <div class="month-label"><span>${g.label}${year && g.monthIdx < 12 ? ' ' + year : ''}</span></div>
             <div class="events-grid">
               ${g.events.map(renderCard).join('')}
             </div>
           </div>`).join('');
       }
 
-      /* ── Main ── */
-      async function loadEvents() {
+      /* ── Main: tab gid → container ── */
+      const CALENDARS = [
+        { gid: '0',          container: 'events-container',      year: '' },     // UAE community calendar 2026 (Sheet1)
+        { gid: '1563611524', container: 'events-container-2027', year: '2027' }, // ABS-CBN international events 2027 (tab "2027")
+      ];
+      const FAIL_HTML = '<div class="events-state"><strong>The live calendar could not be loaded</strong><p>See the 2026 highlights above, or <a href="#plan-a-campaign" style="color:var(--ph-gold)">ask us for the current Filipino events schedule</a>.</p></div>';
+
+      async function loadCalendar(cal) {
+        const el = document.getElementById(cal.container);
+        if (!el) return;
         try {
-          const data = await loadViaJsonp();
-          const groups = parseMonthGrid(data);
-          document.getElementById('events-container').innerHTML = renderAll(groups);
+          const data = await loadViaJsonp(cal.gid);
+          el.innerHTML = renderAll(parseMonthGrid(data), cal.year);
         } catch (e) {
-          document.getElementById('events-container').innerHTML =
-            '<div class="events-state"><strong>The live calendar could not be loaded</strong><p>See the 2026 highlights above, or <a href="#plan-a-campaign" style="color:var(--ph-gold)">ask us for the current Filipino events schedule</a>.</p></div>';
+          el.innerHTML = FAIL_HTML;
         }
       }
 
-      loadEvents();
+      CALENDARS.forEach(loadCalendar);
     })();
   </script>
 </body>
