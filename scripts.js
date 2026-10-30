@@ -149,9 +149,7 @@
       const p = Math.max(0, Math.min(1, y / (vh * 0.9)));
       heroParallax.style.setProperty('--py', `-${Math.round(y * 0.25)}px`);
       heroParallax.style.setProperty('--po', (1 - p * 0.9).toFixed(3));
-      heroParallax.style.setProperty('--ps', (1 - p * 0.14).toFixed(3));
-      heroParallax.style.setProperty('--pb', (p * 6).toFixed(2) + 'px');
-      if (heroSec) heroSec.style.setProperty('--pd', (p * 0.6).toFixed(3));
+      heroParallax.style.setProperty('--ps', (1 - p * 0.06).toFixed(3));
       pTick = false;
     };
     window.addEventListener('scroll', () => {

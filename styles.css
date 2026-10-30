@@ -1115,47 +1115,16 @@ body.svc-creative main#main::after{
    ========================================================================== */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Curtain: hero stays put while the page slides over it */
-.home .hero-home{position:sticky;top:0;z-index:0;min-height:100vh}
+/* Curtain: hero stays put while the page slides over it (no blur, no rounded edge) */
+.home .hero-home{position:sticky;top:0;z-index:0}
 .home .stage{position:relative;z-index:2;background:var(--c-paper)}
-.home .hero-parallax{
-  transform:translate3d(0,var(--py,0px),0) scale(var(--ps,1));
-  filter:blur(var(--pb,0px));
-}
-.home .hero-home::after{
-  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:#05010f;opacity:var(--pd,0);
-}
-
-/* Clients */
-.clients{
-  position:relative;overflow:hidden;
-  background:
-    radial-gradient(700px 300px at 85% 0%, rgba(0,196,140,.16), transparent 60%),
-    linear-gradient(180deg,#120228 0%, var(--c-ink) 100%);
-  color:#fff;
-  border-radius:clamp(24px,4vw,48px) clamp(24px,4vw,48px) 0 0;
-  margin-top:-48px;
-  padding:clamp(56px,7vw,96px) 0 clamp(48px,6vw,80px);
-  box-shadow:0 -30px 60px rgba(5,1,15,.45);
-}
-.clients-head{text-align:center;display:grid;justify-items:center;gap:12px;margin-bottom:clamp(28px,4vw,48px)}
-.clients-head h2{font-size:var(--fs-h2)}
-.clients .grad,.talent .grad{background:var(--grad-green);-webkit-background-clip:text;background-clip:text;color:transparent}
-.marquee{overflow:hidden;padding:6px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.home .hero-parallax{transform:translate3d(0,var(--py,0px),0) scale(var(--ps,1))}
+.talent .grad{background:var(--grad-green);-webkit-background-clip:text;background-clip:text;color:transparent}
+.marquee{overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .marquee-inner{display:flex;width:max-content;will-change:transform}
 .marquee-set{display:flex;align-items:center;list-style:none;margin:0;padding:0;flex-shrink:0}
-.marquee .wm{
-  font-size:clamp(34px,6vw,84px);font-weight:800;letter-spacing:-.03em;line-height:1.15;
-  white-space:nowrap;padding:0 clamp(14px,2vw,28px);color:#fff;
-  transition:color .3s var(--ease), -webkit-text-stroke-color .3s var(--ease);
-}
-.marquee .wm-o{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.55)}
-.marquee .wm:hover{color:var(--c-green);-webkit-text-stroke-color:var(--c-green)}
-.marquee .wm-sep{color:var(--c-green);font-size:clamp(16px,2vw,26px);opacity:.8}
-.marquee + .marquee{margin-top:clamp(2px,1vw,10px)}
 
 /* Talent showcase */
 .talent{position:relative;background:var(--c-ink);color:#fff}
@@ -1264,37 +1233,29 @@ body.svc-creative main#main::after{
   .talent-hint .h-swipe{display:inline}
   .talent-track{padding-bottom:10px}
 }
-@media (prefers-reduced-motion: reduce){
-  .marquee{-webkit-mask-image:none;mask-image:none}
-  .marquee-inner{transform:none!important;width:100%}
-  .marquee-set{flex-wrap:wrap;justify-content:center;flex-shrink:1;width:100%}
-  .marquee .wm{font-size:clamp(26px,4vw,48px)}
-  .marquee + .marquee{display:none}
-}
 
-/* Clients — logo version (light band so brand colours read correctly) */
-.clients{
-  background:#fff;color:var(--c-text);
-  box-shadow:0 -30px 60px rgba(5,1,15,.35);
-  padding:clamp(48px,6vw,80px) 0 clamp(44px,5vw,72px);
-  border-bottom:1px solid var(--c-border);
-}
-.clients .clients-head h2{color:var(--c-purple)}
-.logo-marquee .marquee-set{gap:0}
+/* Clients — logo strip.
+   Every logo sits in the same fixed box and is scaled to fit (object-fit:contain),
+   then nudged with --s so wide and compact marks carry similar visual weight. */
+.clients{background:#fff;padding:clamp(44px,5vw,72px) 0 clamp(40px,4.5vw,64px);border-bottom:1px solid var(--c-border)}
+.clients-head{text-align:center;display:grid;justify-items:center;gap:10px;margin-bottom:clamp(24px,3vw,40px)}
+.clients-head h2{font-size:clamp(22px,2.6vw,32px);color:var(--c-purple)}
+.clients-head .grad{background:var(--grad-green);-webkit-background-clip:text;background-clip:text;color:transparent}
 .logo-marquee .logo-item{
-  flex:0 0 auto;display:grid;place-items:center;
-  height:clamp(64px,8vw,96px);padding:0 clamp(36px,5vw,72px);
+  flex:0 0 auto;box-sizing:content-box;
+  width:var(--lw,190px);height:var(--lh,64px);
+  padding:0 clamp(26px,3.2vw,46px);
+  display:flex;align-items:center;justify-content:center;
 }
 .logo-marquee .logo-item img{
-  height:clamp(40px,5vw,62px);width:auto;max-width:none;display:block;
-  transition:transform .35s var(--ease), filter .35s var(--ease);
+  display:block;width:100%;height:100%;object-fit:contain;
+  transform:scale(var(--s,1));transition:transform .35s var(--ease);
 }
-.logo-marquee .logo-item img[alt="Botim"]{height:clamp(30px,3.6vw,46px)}
-.logo-marquee .logo-item:hover img{transform:scale(1.08)}
+.logo-marquee .logo-item:hover img{transform:scale(calc(var(--s,1) * 1.06))}
+@media (max-width:720px){.logo-marquee{--lw:140px;--lh:48px}}
 @media (prefers-reduced-motion: reduce){
-  .logo-marquee .marquee-set{justify-content:center}
+  .marquee{-webkit-mask-image:none;mask-image:none}
+  .marquee-inner{transform:none!important;width:100%;flex-wrap:wrap;justify-content:center}
+  .marquee-inner .marquee-set + .marquee-set{display:none}
+  .marquee-set{flex-wrap:wrap;justify-content:center;flex-shrink:1;row-gap:24px}
 }
-.logo-marquee .logo-item img[alt="TapTap Send"]{height:clamp(52px,6.4vw,80px)}
-.logo-marquee .logo-item img[alt="Al Fardan Exchange"]{height:clamp(30px,3.6vw,46px)}
-.logo-marquee .logo-item img[alt="DaytoDay"]{height:clamp(40px,5vw,62px)}
-.logo-marquee .logo-item img[alt="Al Fardan Exchange"]{height:clamp(38px,4.6vw,58px)}
