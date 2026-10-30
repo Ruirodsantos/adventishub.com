@@ -1295,3 +1295,6 @@ body.svc-creative main#main::after{
   .logo-marquee .marquee-set{justify-content:center}
 }
 .logo-marquee .logo-item img[alt="TapTap Send"]{height:clamp(52px,6.4vw,80px)}
+.logo-marquee .logo-item img[alt="Al Fardan Exchange"]{height:clamp(30px,3.6vw,46px)}
+.logo-marquee .logo-item img[alt="DaytoDay"]{height:clamp(40px,5vw,62px)}
+.logo-marquee .logo-item img[alt="Al Fardan Exchange"]{height:clamp(38px,4.6vw,58px)}
