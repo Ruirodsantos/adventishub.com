@@ -134,20 +134,24 @@
     updateProgress();
   }
 
-  // ---------- Hero scroll parallax (Rockstar-style) ----------
-  // Hero copy drifts up at ~35% of scroll speed and fades out gently,
-  // creating a smooth reveal as the next section comes into view.
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- Hero curtain (homepage) ----------
+  // Hero stays pinned while the page slides over it; the copy drifts up,
+  // shrinks, blurs and darkens as the next section covers it.
   const heroParallax = document.querySelector('.hero-home .hero-parallax');
-  if (heroParallax && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const heroSec = document.querySelector('.hero-home');
+  if (heroParallax && !reduceMotion) {
     let pTick = false;
     const updateHero = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       const vh = window.innerHeight || 800;
-      const p = Math.max(0, Math.min(1, y / (vh * 0.85)));
-      const translate = Math.round(y * 0.35);
-      const opacity = 1 - p;
-      heroParallax.style.setProperty('--py', `-${translate}px`);
-      heroParallax.style.setProperty('--po', opacity.toFixed(3));
+      const p = Math.max(0, Math.min(1, y / (vh * 0.9)));
+      heroParallax.style.setProperty('--py', `-${Math.round(y * 0.25)}px`);
+      heroParallax.style.setProperty('--po', (1 - p * 0.9).toFixed(3));
+      heroParallax.style.setProperty('--ps', (1 - p * 0.14).toFixed(3));
+      heroParallax.style.setProperty('--pb', (p * 6).toFixed(2) + 'px');
+      if (heroSec) heroSec.style.setProperty('--pd', (p * 0.6).toFixed(3));
       pTick = false;
     };
     window.addEventListener('scroll', () => {
@@ -156,9 +160,121 @@
     updateHero();
   }
 
+  // ---------- Scroll velocity (shared) ----------
+  let lastY = window.scrollY, velocity = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    velocity = Math.max(-60, Math.min(60, y - lastY));
+    lastY = y;
+  }, { passive: true });
+
+  // ---------- Client marquees ----------
+  // Endless rows; scrolling the page speeds them up (and the direction follows).
+  const marquees = Array.from(document.querySelectorAll('[data-marquee]'));
+  if (marquees.length) {
+    const rows = marquees.map(m => {
+      const set = m.querySelector('.marquee-set');
+      const inner = document.createElement('div');
+      inner.className = 'marquee-inner';
+      m.insertBefore(inner, set);
+      inner.appendChild(set);
+      const fill = () => {
+        const w = set.getBoundingClientRect().width || 1;
+        while (inner.children.length < 2 || inner.getBoundingClientRect().width < window.innerWidth + w) {
+          const c = set.cloneNode(true); c.setAttribute('aria-hidden', 'true'); inner.appendChild(c);
+          if (inner.children.length > 12) break;
+        }
+        return w;
+      };
+      return { m, inner, set, w: fill(), x: 0, speed: parseFloat(m.dataset.speed) || 40, fill };
+    });
+    window.addEventListener('resize', () => rows.forEach(r => { r.w = r.fill(); }));
+    if (!reduceMotion) {
+      let visible = true;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(es => { visible = es.some(e => e.isIntersecting); }).observe(marquees[0].closest('section') || marquees[0]);
+      }
+      let boost = 0, t0 = performance.now();
+      const loop = t => {
+        const dt = Math.min(0.05, (t - t0) / 1000); t0 = t;
+        boost += (Math.abs(velocity) * 0.12 - boost) * 0.08;
+        velocity *= 0.9;
+        if (visible) rows.forEach(r => {
+          r.x -= r.speed * (1 + boost) * dt;
+          if (r.x <= -r.w) r.x += r.w;
+          if (r.x > 0) r.x -= r.w;
+          r.inner.style.transform = `translate3d(${r.x.toFixed(2)}px,0,0)`;
+        });
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    }
+  }
+
+  // ---------- Talent showcase: pinned horizontal scroll (desktop) ----------
+  const talent = document.querySelector('.talent');
+  if (talent) {
+    const pin = talent.querySelector('.talent-pin');
+    const track = talent.querySelector('.talent-track');
+    const ghost = talent.querySelector('.talent-ghost');
+    const cards = Array.from(talent.querySelectorAll('.t-card'));
+    const mq = window.matchMedia('(min-width: 900px) and (min-height: 560px)');
+    let dist = 0, active = false, tTick = false;
+
+    const cardFx = () => {
+      const vw = window.innerWidth;
+      cards.forEach(c => {
+        const r = c.getBoundingClientRect();
+        const off = Math.max(-1, Math.min(1, ((r.left + r.width / 2) - vw / 2) / (vw / 2)));
+        c.style.setProperty('--ry', (off * -12).toFixed(2) + 'deg');
+        c.style.setProperty('--sc', (1 - Math.abs(off) * 0.08).toFixed(3));
+        c.style.setProperty('--ix', (off * -24).toFixed(1) + 'px');
+      });
+    };
+    const update = () => {
+      tTick = false;
+      if (active) {
+        const top = pin.getBoundingClientRect().top;
+        const p = dist > 0 ? Math.max(0, Math.min(1, -top / dist)) : 0;
+        track.style.setProperty('--tx', (-p * dist).toFixed(1) + 'px');
+        if (ghost) ghost.style.setProperty('--gx', (-p * 600).toFixed(1) + 'px');
+      }
+      cardFx();
+    };
+    const setup = () => {
+      active = mq.matches && !reduceMotion;
+      talent.classList.toggle('is-pinned', active);
+      if (active) {
+        track.style.setProperty('--tx', '0px');
+        dist = Math.max(0, track.scrollWidth - window.innerWidth);
+        pin.style.height = (window.innerHeight + dist) + 'px';
+      } else {
+        pin.style.height = '';
+        track.style.removeProperty('--tx');
+      }
+      update();
+    };
+    if (!reduceMotion) {
+      window.addEventListener('scroll', () => { if (!tTick) { requestAnimationFrame(update); tTick = true; } }, { passive: true });
+      track.addEventListener('scroll', () => { if (!tTick) { requestAnimationFrame(update); tTick = true; } }, { passive: true });
+    }
+    window.addEventListener('resize', setup);
+    window.addEventListener('load', setup);
+    setup();
+  }
+
+  // ---------- Partner tiles: cursor spotlight ----------
+  document.querySelectorAll('.partner').forEach(el => {
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
   // ---------- About-preview decoration parallax ----------
   const aboutSec = document.querySelector('.section.tight.about-preview');
-  if (aboutSec && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (aboutSec && !reduceMotion) {
     let aTick = false;
     const updateAbout = () => {
       const rect = aboutSec.getBoundingClientRect();
