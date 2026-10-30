@@ -32,3 +32,6 @@ com.adventishub.deploy.plist
 
 # sed backups
 *.bak
+
+# Claude working files
+Claude outputs/
