@@ -1271,3 +1271,27 @@ body.svc-creative main#main::after{
   .marquee .wm{font-size:clamp(26px,4vw,48px)}
   .marquee + .marquee{display:none}
 }
+
+/* Clients — logo version (light band so brand colours read correctly) */
+.clients{
+  background:#fff;color:var(--c-text);
+  box-shadow:0 -30px 60px rgba(5,1,15,.35);
+  padding:clamp(48px,6vw,80px) 0 clamp(44px,5vw,72px);
+  border-bottom:1px solid var(--c-border);
+}
+.clients .clients-head h2{color:var(--c-purple)}
+.logo-marquee .marquee-set{gap:0}
+.logo-marquee .logo-item{
+  flex:0 0 auto;display:grid;place-items:center;
+  height:clamp(64px,8vw,96px);padding:0 clamp(36px,5vw,72px);
+}
+.logo-marquee .logo-item img{
+  height:clamp(40px,5vw,62px);width:auto;max-width:none;display:block;
+  transition:transform .35s var(--ease), filter .35s var(--ease);
+}
+.logo-marquee .logo-item img[alt="Botim"]{height:clamp(30px,3.6vw,46px)}
+.logo-marquee .logo-item:hover img{transform:scale(1.08)}
+@media (prefers-reduced-motion: reduce){
+  .logo-marquee .marquee-set{justify-content:center}
+}
+.logo-marquee .logo-item img[alt="TapTap Send"]{height:clamp(52px,6.4vw,80px)}

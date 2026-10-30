@@ -188,7 +188,9 @@
       };
       return { m, inner, set, w: fill(), x: 0, speed: parseFloat(m.dataset.speed) || 40, fill };
     });
-    window.addEventListener('resize', () => rows.forEach(r => { r.w = r.fill(); }));
+    const refill = () => rows.forEach(r => { r.w = r.fill(); });
+    window.addEventListener('resize', refill);
+    window.addEventListener('load', refill);
     if (!reduceMotion) {
       let visible = true;
       if ('IntersectionObserver' in window) {
