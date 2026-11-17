@@ -1289,26 +1289,9 @@ body.svc-creative main#main::after{
 }
 .story-intro{padding-bottom:0}
 
-.story-example{background:var(--c-paper);margin-top:clamp(24px,4vw,56px)}
-.botim-gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px);align-items:start}
-.botim-shot{margin:0}
-.botim-shot:nth-child(2){margin-top:clamp(32px,6vw,90px)}
-.botim-frame{
-  aspect-ratio:4/5;border-radius:var(--radius-lg);overflow:hidden;position:relative;
-  background:#fff;border:1px solid var(--c-border);box-shadow:var(--shadow-lg);
-}
-.botim-frame::before{
-  content:"";position:absolute;inset:0;
-  background:url("images/clients/botim.svg") center/45% no-repeat;
-}
-.botim-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.botim-shot figcaption{margin-top:12px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--c-text-soft)}
-
 @media (max-width:860px){
   .story-grid{grid-template-columns:1fr;gap:20px}
   .story.reverse .story-media{order:0}
   .story-media{position:relative;top:0}
   .story-beat,.story-beat:first-child{min-height:0;padding:18px 0}
-  .botim-gallery{grid-template-columns:1fr}
-  .botim-shot:nth-child(2){margin-top:0}
 }
