@@ -1214,6 +1214,7 @@ body.svc-creative main#main::after{
 .partner:hover::before{opacity:1}
 .partner img{position:relative;max-width:68%;max-height:58%;width:auto;height:auto;object-fit:contain;transition:transform .4s var(--ease)}
 .partner:hover img{transform:scale(1.06)}
+.partner img.logo-tile{max-height:66%;border-radius:14px}
 @media (max-width:720px){.partner-grid{grid-template-columns:repeat(2,1fr)}.partner:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 6px)}}
 
 /* Services: 3D rise-in on the homepage */
